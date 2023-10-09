@@ -10,7 +10,7 @@
 - git commit -m ""
 - git checkout dev
 - git pull : retrieve the version pushed on the dev branch
-- git merge : merging my branch with the dev branch
+- git merge my-branch : merging my branch with the dev branch
 - git push
 - git checkout my-branch : go back on the local user branch
 
