@@ -2,8 +2,8 @@
 - The goal is to create a website to manage job advertisment. 
 
 # Technologies used :
-- Front-end : ReactJS, Vite, TailWindCSS, Axios, I18next ; 
-- Back-end : NodeJS, Express, Sequalize, mySQL ; 
+- Front-end : ReactJS, Vite, TailWindCSS, Axios, I18next;
+- Back-end : NodeJS, Express, Sequalize, mySQL;
 
 # Functions : 
 - Open the ads; 
