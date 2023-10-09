@@ -31,4 +31,4 @@ npm run dev : allows to launch the website;
 
 # Back-end commands :
 npm install : allows to install librairies; 
-npm run dev : allows to launch the website; 
+npm start : allows to launch the website; 
