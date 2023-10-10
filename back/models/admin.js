@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Admin extends Model {
     static associate(models) {
-      
+      Admin.belongsTo(models.UserData);
     }
   }
   Admin.init({

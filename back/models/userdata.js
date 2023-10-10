@@ -8,9 +8,6 @@ module.exports = (sequelize, DataTypes) => {
       return await bcrypt.compare(password, process.env.PASSWORD_PREFIX + this.password);
     }
     static associate(models) {
-      UserData.belongsTo(models.Client, {constraints: false, foreignKey: 'associatedId', as: 'client'});
-      UserData.belongsTo(models.Company, {constraints: false, foreignKey: 'associatedId', as: 'company'});
-      UserData.belongsTo(models.Admin, {constraints: false, foreignKey: 'associatedId', as: 'admin'});
     }
   }
   UserData.init({

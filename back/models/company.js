@@ -5,6 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Company extends Model {
     static associate(models) {
+      Company.belongsTo(models.UserData);
       Company.hasMany(models.Ad);
     }
   }
