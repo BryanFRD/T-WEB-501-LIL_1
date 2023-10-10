@@ -8,14 +8,11 @@ const Navbar = () => {
 
     return (
         <>
-        <nav className='
-        flex flex-col px-10 py-2 gap-3
-        lg:flex lg:flex-row
-        '>
-            <LaunchResearch/>
-            <PlaceAd/>
-            <Login/>
-            <Subscribe/>
+        <nav className='grid grid-cols-2'>
+                <LaunchResearch/>
+                <PlaceAd/>
+                <Login/>
+                <Subscribe/>
         </nav>
         </>
     );

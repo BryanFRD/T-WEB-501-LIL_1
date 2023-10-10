@@ -2,9 +2,11 @@ import React from 'react';
 
 const PlaceAd = () => {
     return (
-        <p>
-        Déposer une annonce
-        </p>
+        <div>
+            <p>
+                Déposer une annonce
+            </p>
+        </div>
     );
 };
 

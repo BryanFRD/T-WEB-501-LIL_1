@@ -2,7 +2,9 @@ import React from 'react';
 
 const Subscribe = () => {
     return (
-           <button className='bg-sky-700 text-white rounded p-1'>S'inscrire</button> 
+        <div>
+           <button className='bg-sky-700 text-white rounded p-1'>S'inscrire</button>
+        </div> 
     );
 };
 
