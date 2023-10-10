@@ -38,6 +38,18 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+    
+    await queryInterface.addConstraint('Ads', {
+      type: 'foreign key',
+      fields: ['companyId'],
+      name: 'fk_ads_company',
+      references: {
+        table: 'Companies',
+        field: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Ads');

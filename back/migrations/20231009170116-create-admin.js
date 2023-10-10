@@ -31,6 +31,18 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+    
+    await queryInterface.addConstraint('Admins', {
+      type: 'foreign key',
+      fields: ['associatedId'],
+      name: 'fk_admins_userdata',
+      references: {
+        table: 'UserData',
+        field: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Admins');

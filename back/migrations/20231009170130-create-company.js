@@ -21,6 +21,9 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
+      associatedId: {
+        type: Sequelize.UUID
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -32,6 +35,18 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
+    });
+    
+    await queryInterface.addConstraint('Companies', {
+      type: 'foreign key',
+      fields: ['associatedId'],
+      name: 'fk_company_userdata',
+      references: {
+        table: 'UserData',
+        field: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     });
   },
   async down(queryInterface, Sequelize) {

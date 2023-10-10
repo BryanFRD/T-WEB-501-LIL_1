@@ -26,6 +26,10 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      adId: {
+        type: Sequelize.UUID,
+        allowNull: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -37,6 +41,18 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
+    });
+    
+    await queryInterface.addConstraint('Appliers', {
+      type: 'foreign key',
+      fields: ['adId'],
+      name: 'fk_appliers_ad',
+      references: {
+        table: 'Ads',
+        field: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     });
   },
   async down(queryInterface, Sequelize) {
