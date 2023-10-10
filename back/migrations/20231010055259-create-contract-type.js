@@ -4,13 +4,12 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('ContractTypes', {
       id: {
-        allowNull: false,
+        type: DataTypes.UUID,
         primaryKey: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        defaultValue: DataTypes.UUIDV4,
       },
       name: {
-        type: Sequelize.STRING,
+        type:DataTypes.STRING,
         allowNull: false
       },
       createdAt: {
