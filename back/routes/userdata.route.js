@@ -1,10 +1,12 @@
 const router = require('express').Router();
-const UserDataController = require('../controllers/userdata.controller.js');
+const AdController = require('../controllers/userdata.controller.js');
 
-const userController = new UserDataController();
+const adController = new AdController();
 
-router.get('/users', userController.findAll);
-router.get('/users/:id', userController.findByPk);
-router.delete('/users/:id', userController.delete);
+router.get('/ads', adController.findAll);
+router.get('/ads/:id', adController.findByPk);
+router.post('/ads', adController.create);
+router.put('/ads/:id', adController.update);
+router.delete('/ads/:id', adController.delete);
 
 module.exports = router;

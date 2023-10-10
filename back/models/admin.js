@@ -15,11 +15,11 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV4,
     },
     firstname: {
-      type:DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     lastname: {
-      type:DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     }
   }, {
