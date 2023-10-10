@@ -1,11 +1,11 @@
+const database = require("./models/index.js");
 const express = require("express");
 const cors = require("cors");
-const database = require('./db/database');
 const corsOptions = {
   origin: "http://localhost:8081"
 };
 
-const start = async () => {  
+const start = async () => {
   const app = express();
   
   // const err = await database.sync({force: false})
@@ -16,6 +16,10 @@ const start = async () => {
   //   console.log(`Error while trying to synchronize with the database!\nError: `, err);
   //   return;
   // }
+  
+  database.sequelize.models.UserData.create({
+    email: 'test'
+  });
   
   app.use(cors(corsOptions));
   app.use(express.json());
