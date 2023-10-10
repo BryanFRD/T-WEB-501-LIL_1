@@ -14,11 +14,14 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
     },
-    firstname: DataTypes.STRING,
-    lastname: DataTypes.STRING
+    name: {
+      type:DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'ContractType',
+    paranoid: true
   });
   return ContractType;
 };

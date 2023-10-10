@@ -14,11 +14,23 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
     },
-    firstname: DataTypes.STRING,
-    lastname: DataTypes.STRING,
-    email: DataTypes.STRING,
-    phonenumber: DataTypes.STRING,
-    description: DataTypes.STRING
+    firstname: {
+      type:DataTypes.STRING,
+      allowNull: false
+    },
+    lastname: {
+      type:DataTypes.STRING,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING
+    },
+    phonenumber: {
+      type: DataTypes.STRING
+    },
+    description: {
+      type: DataTypes.STRING
+    }
   }, {
     sequelize,
     modelName: 'Appliers',

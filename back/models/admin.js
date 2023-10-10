@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
     },
-    firstname: DataTypes.STRING,
-    lastname: DataTypes.STRING
+    firstname: {
+      type:DataTypes.STRING,
+      allowNull: false
+    },
+    lastname: {
+      type:DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Admin',
