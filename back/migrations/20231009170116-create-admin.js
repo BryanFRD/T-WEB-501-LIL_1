@@ -5,9 +5,9 @@ module.exports = {
     await queryInterface.createTable('Admins', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       firstname: {
         type: Sequelize.STRING
@@ -15,12 +15,18 @@ module.exports = {
       lastname: {
         type: Sequelize.STRING
       },
+      associatedId: {
+        type: Sequelize.UUID
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
+        type: Sequelize.DATE
+      },
+      deletedAt: {
         type: Sequelize.DATE
       }
     });

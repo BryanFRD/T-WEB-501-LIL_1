@@ -5,15 +5,19 @@ module.exports = {
     await queryInterface.createTable('Ads', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
-      firstname: {
+      title: {
         type: Sequelize.STRING
       },
-      lastname: {
+      description: {
         type: Sequelize.STRING
+      },
+      companyId: {
+        type: Sequelize.UUID,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -21,6 +25,9 @@ module.exports = {
       },
       updatedAt: {
         allowNull: false,
+        type: Sequelize.DATE
+      },
+      deletedAt: {
         type: Sequelize.DATE
       }
     });
