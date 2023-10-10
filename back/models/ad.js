@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Ad extends Model {
     static associate(models) {
-      Ad.hasMany(models.ContractType, {through: 'AdContractType'});
+      Ad.belongsToMany(models.ContractType, {through: 'AdContractType'});
       Ad.belongsTo(models.Company, {constraints: false, foreignKey: 'companyId', as: 'company'})
     }
   }
