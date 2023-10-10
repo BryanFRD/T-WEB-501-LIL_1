@@ -10,6 +10,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Ad.init({
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
+    },
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     status: DataTypes.ENUM('OPEN', 'CLOSED')

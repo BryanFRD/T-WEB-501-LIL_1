@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   AdContractType.init({
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
+    },
     adId: {
       type: DataTypes.UUID
     },

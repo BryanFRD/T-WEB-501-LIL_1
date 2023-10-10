@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Appliers.init({
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
+    },
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,
     email: DataTypes.STRING,

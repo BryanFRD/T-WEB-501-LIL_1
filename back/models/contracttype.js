@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ContractType.init({
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
+    },
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING
   }, {
