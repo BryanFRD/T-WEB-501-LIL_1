@@ -1,1 +1,1 @@
-exports.userdata = require('./userdata');
+exports.userdata = require('./userdata.route.js');
