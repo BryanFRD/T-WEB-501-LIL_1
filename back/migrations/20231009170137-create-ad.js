@@ -4,21 +4,21 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Ads', {
       id: {
-        type: DataTypes.UUID,
+        type: Sequelize.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false
       },
       title: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       description: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       status: {
-        type: DataTypes.ENUM('OPEN', 'CLOSED'),
+        type: Sequelize.ENUM('OPEN', 'CLOSED'),
         defaultValue: 'OPEN',
         allowNull: false
       },
