@@ -1,9 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     return (
-        <div>
-        <a>Se connecter</a>
+        <div className='text-center
+        md:col-start-5 md:m-auto'>
+        <Link to="login">
+            Se&nbsp;connecter
+            </Link>
         </div>
     );
 };
