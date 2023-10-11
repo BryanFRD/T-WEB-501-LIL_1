@@ -17,6 +17,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      validated: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Company extends Model {
     static associate(models) {
-      Company.belongsTo(models.UserData);
+      Company.belongsTo(models.UserData, { foreignKey: 'associatedId', as: 'userData'});
       Company.hasMany(models.Ad);
     }
   }
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     description: {
       type: DataTypes.STRING
@@ -25,9 +25,9 @@ module.exports = (sequelize, DataTypes) => {
     phonenumber: {
       type: DataTypes.STRING
     },
-    email: {
-      type: DataTypes.STRING
-    },
+    associatedId: {
+      type: DataTypes.UUID
+    }
   }, {
     sequelize,
     modelName: 'Company',

@@ -30,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
       set(value) {
         this.setDataValue('password', bcrypt.hashSync(value, 10).replace(process.env.PASSWORD_PREFIX, ''));
       }
+    },
+    validated: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      allowNull: false
     }
   }, {
     sequelize,
