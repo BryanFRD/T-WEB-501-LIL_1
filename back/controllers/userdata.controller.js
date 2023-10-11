@@ -1,9 +1,10 @@
 const BaseController = require('./base.controller');
+const UserDataValidator = require('../validators/userdata.validator');
 
 class UserDataController extends BaseController {
   
   constructor(){
-    super('UserData');
+    super('UserData', new UserDataValidator());
   }
   
   create = (req, res) => {

@@ -1,9 +1,10 @@
 const BaseController = require('./base.controller');
+const ContractTypeValidator = require('../validators/contracttype.validator');
 
 class ContractTypeController extends BaseController {
   
   constructor(){
-    super('ContractType');
+    super('ContractType', new ContractTypeValidator());
   }
   
   create = (req, res) => {
