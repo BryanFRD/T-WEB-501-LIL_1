@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AdDetails = () => {
+const Subscribe = () => {
     return (
         <div>
-            
+        <a>S'inscrire</a>
         </div>
     );
 };
 
-export default AdDetails;
+export default Subscribe;

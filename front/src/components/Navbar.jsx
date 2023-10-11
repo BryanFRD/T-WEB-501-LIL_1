@@ -1,16 +1,22 @@
 import React from 'react';
-import Button from './Button';
+import Login from './Login';
+import Subscribe from './Subscribe';
+import LaunchResearch from './LaunchResearch';
+import PlaceAd from './PlaceAd';
+import Logo from './Logo'
 
 const Navbar = () => {
+
     return (
-        <nav>
-          <ul>
-            <li>Lancer la recherche</li>
-            <li>Déposer une annonce</li>
-            </ul>
-            <Button>Se connecter</Button>
-            <Button>S'inscrire</Button>
+        <>
+        <nav className='flex items-center justify-between flex-wrap p-6'>
+                <Logo/>
+                <LaunchResearch/>
+                <PlaceAd/>
+                <Login/>
+                <Subscribe/>
         </nav>
+        </>
     );
 };
 
