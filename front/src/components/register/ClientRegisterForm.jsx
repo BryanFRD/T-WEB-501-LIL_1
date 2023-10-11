@@ -1,47 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Api from '../../api/Api';
+import Input from '../form/Input';
 
 const ClientRegisterForm = () => {
+  const [errors, setErrors] = useState([]);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    
+    const data = Object.fromEntries(new FormData(e.currentTarget));
+    console.log(data)
+    setErrors([]);
     Api.post('/auth/register', data)
       .then((data) => {
-        console.log(data);
+        console.log("succeed", data);
       })
       .catch(({data}) => {
-        console.log(data);
+        console.log(data)
+        setErrors(() => {
+          const errors = [];
+          for (const key of data.message.details) {
+            errors.push(key.key);
+          }
+          return errors;
+        })
       });
   }
   
   return (
-    <form onSubmit={handleSubmit} className="px-8 pt-6 pb-8">
-      <div className='mb-4'>
-        <label className="block text-dark text-sm font-bold mb-2" htmlFor="firstname">
-          Prénom
-        </label>
-        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline" id="firstname" type="text" name='firstname' placeholder="Prénom" />
-      </div>
-      <div className="mb-4">
-        <label className="block text-dark text-sm font-bold mb-2" htmlFor="lastname">
-          Nom
-        </label>
-        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline" id="lastname" type="text" name='lastname' placeholder="Nom" />
-      </div>
-      <div className="mb-4">
-        <label className="block text-dark text-sm font-bold mb-2" htmlFor="email">
-          Email
-        </label>
-        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" name='email' placeholder="exemple@jobhub.fr" />
-      </div>
-      <div className="mb-6">
-        <label className="block text-dark text-sm font-bold mb-2" htmlFor="password">
-          Mot&nbsp;de&nbsp;passe
-        </label>
-        <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-dark mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" name='password' type="password" placeholder="******************" />
-        <p className="text-red-500 text-xs italic">Please choose a password.</p>
-      </div>
+    <form onSubmit={handleSubmit} className="px-8 pt-6 pb-8 flex flex-col gap-6">
+      <Input hasError={errors.includes('firstname')} errorMessage='Veuillez indiquer votre prénom.' title={'Prénom'} placeholder={'Prénom'} name={'firstname'}/>
+      <Input hasError={errors.includes('lastname')} errorMessage='Veuillez indiquer votre nom.' title={'Nom'} placeholder={'Nom'} name={'lastname'}/>
+      <Input hasError={errors.includes('email')} errorMessage='Veuillez indiquer un mail valide.' title={`Email`} placeholder={'exemple@jobhub.fr'} name={'email'}/>
+      <Input hasError={errors.includes('password')} errorMessage='Veuillez indiquer un mot de passe valide.' title={'Mot de passe'} placeholder={'********'} name={'password'} type='password'/>
       <div className="flex items-center justify-between">
         <button className="bg-primary hover:bg-primary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
           S'enregistrer

@@ -14,7 +14,7 @@ class BaseValidator {
     const response = schema.validate(data, options);
     
     if(response.error){
-      response.error.details = response.error.details[0].context?.details?.map(({context, message}) => ({key: context.key, message}));
+      response.error.details = response.error?.details?.length > 0 ? response.error.details[0]?.context?.details?.map(({context, message}) => ({key: context.key, message})) : [];
     }
     
     return response;
