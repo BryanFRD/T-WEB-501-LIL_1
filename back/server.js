@@ -3,8 +3,9 @@ const express = require("express");
 const cors = require("cors");
 const routes = require("./routes/index.js");
 const authenticateToken = require('./middlewares/authentication.middleware.js');
+const cookieParser = require('cookie-parser');
 const corsOptions = {
-  origin: "http://127.0.0.1:5173",
+  origin: ["http://127.0.0.1:5173", "http://localhost:5173"],
   credentials: true
 };
 
@@ -12,6 +13,7 @@ const start = async () => {
   const app = express();
   
   app.use(cors(corsOptions));
+  app.use(cookieParser(process.env.COOKIE_TOKEN));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(authenticateToken);

@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import ClientRegisterForm from '../components/register/ClientRegisterForm';
 import CompanyRegisterForm from '../components/register/CompanyRegisterForm';
-import { Link } from 'react-router-dom';
 
 const RegisterScreen = () => {
   const [tab, setTab] = useState('client');
   
   return (
-    <div className='flex justify-center align-center'>
-      <Link></Link>
-      <div className='p-16 w-full md:w-1/2 lg:w-1/3'>
+    <div className='flex flex-col justify-center align-center gap-8'>
+      <h1 className='text-center text-4xl mt-8 font-semibold'>Inscription</h1>
+      <div className='md:p-16 w-full md:w-2/3 xl:w-3/5 mx-auto'>
         <div className="text-sm font-medium text-center">
             <ul className="grid grid-cols-2">
                 <li className='w-full hover:bg-slate-100'>

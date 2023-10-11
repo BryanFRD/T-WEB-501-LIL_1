@@ -37,7 +37,7 @@ class AuthController {
       .catch((err) => {
         t.rollback();
         
-        return res.status(400).json({success: false, message: err.message});
+        return res.status(400).json({success: false, message: 'Email already used'});
       });
   }
   
@@ -96,12 +96,12 @@ class AuthController {
   }
   
   refresh = async (req, res) => {
-    const cookie = req.cookies.token;
+    const cookie = req.cookies?.token;
     if(!cookie){
       return res.status(400).json({success: false, message: 'No cookie'});
     }
     
-    const token = await jwt.verify(token, process.env.TOKEN, (err, user) => {
+    const token = await jwt.verify(cookie, process.env.TOKEN, (err, user) => {
       if(!err)
         return user;
     });
@@ -111,16 +111,36 @@ class AuthController {
     }
     
     await sequelize.models.UserData.findByPk(token.id)
-      .then(data => {
-        if(data.updatedAt !== token.updatedAt){
-          res.cookie('token', '', {expires: new Date(0)});
+      .then(async data => {
+        if(Date.parse(data.updatedAt) != Date.parse(token.updatedAt)){
+          // res.cookie('token', '', {expires: new Date(0)});
           return res.status(400).json({success: false, message: 'Token outdated'}); 
+        }
+        
+        let user = await sequelize.models.Client.findOne({where: {associatedId: data.id}})
+          .then((user) => user)
+          .catch(() => null);
+        if(!user){
+          user = await sequelize.models.Company.findOne({where: {associatedId: data.id}})
+            .then((user) => user)
+            .catch(() => null);
+        }
+        
+        if(!user){
+          user = await sequelize.models.Admin.findOne({where: {associatedId: data.id}})
+            .then((user) => user)
+            .catch(() => null);
+        }
+        
+        if(!user) {
+          res.cookie('token', '', {expires: new Date(0)});
+          return res.status(400).json({success: false, message: 'User not found'});
         }
         
         const newToken = jwt.sign({id: data.id, updatedAt: data.updatedAt}, process.env.TOKEN, {expiresIn: 86400});
         
         res.cookie('token', newToken, {secure: process.env.NODE_ENV !== 'development', sameSite: 'none'});
-        return res.status(200).json({success: true, message: 'Token refreshed'});
+        return res.status(200).json({success: true, model: user});
       })
       .catch(err => {
         return res.status(400).json({success: false, message: err.message});

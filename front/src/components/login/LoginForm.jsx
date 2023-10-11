@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Api from '../../api/Api';
 import Input from '../form/Input';
+import Api from '../../api/Api';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
-const CompanyRegisterForm = () => {
+const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
   
@@ -12,15 +12,15 @@ const CompanyRegisterForm = () => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget));
     setErrors([]);
-    Api.post('/auth/register', data)
-      .then((data) => {
-        toast.success('Compte créé !');
+    Api.post('/auth/login', data)
+      .then(({data}) => {
+        toast.success('Connecté !');
         navigate('/');
       })
       .catch(({data}) => {
-        console.log('response:', data);
+        console.log('data:', data);
         if(!data?.message?.details){
-          toast.error('Email déjà utilisé !');
+          toast.error('Email ou mot de passe introuvable !');
           return;
         }
         
@@ -36,16 +36,15 @@ const CompanyRegisterForm = () => {
   
   return (
     <form onSubmit={handleSubmit} className="px-8 pt-6 pb-8 flex flex-col gap-6">
-      <Input hasError={errors.includes('name')} errorMessage={'Veuillez indiquer le nom de l\'entreprise.'}  title={'Nom de l\'entreprise'} placeholder={'Nom de l\'entreprise'} name={'name'}/>
       <Input hasError={errors.includes('email')} errorMessage='Veuillez indiquer un mail valide.' title={`Email`} placeholder={'exemple@jobhub.fr'} name={'email'}/>
       <Input hasError={errors.includes('password')} errorMessage='Veuillez indiquer un mot de passe valide.' title={'Mot de passe'} placeholder={'********'} name={'password'} type='password'/>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col items-start justify-between">
         <button className="bg-primary hover:bg-primary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-          S'enregistrer
+          Connexion
         </button>
       </div>
     </form>
   );
 };
 
-export default CompanyRegisterForm;
+export default LoginForm;
