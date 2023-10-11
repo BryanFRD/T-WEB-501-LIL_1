@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const AdController = require('../controllers/ad.controller.js');
 
-const addController = new UserDataController();
+const adController = new AdController();
 
-router.get('/users', userController.findAll);
-router.get('/users/:id', userController.findByPk);
-router.post('/users', userController.create);
-router.put('/users/:id', userController.update);
-router.delete('/users/:id', userController.delete);
+router.get('/ads', adController.findAll);
+router.get('/ads/:id', adController.findByPk);
+router.post('/ads', adController.create);
+router.put('/ads/:id', adController.update);
+router.delete('/ads/:id', adController.delete);
 
 module.exports = router;
