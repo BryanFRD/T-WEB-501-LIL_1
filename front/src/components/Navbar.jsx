@@ -3,12 +3,14 @@ import Login from './Login';
 import Subscribe from './Subscribe';
 import LaunchResearch from './LaunchResearch';
 import PlaceAd from './PlaceAd';
+import Logo from './Logo'
 
 const Navbar = () => {
 
     return (
         <>
-        <nav className='grid grid-cols-2'>
+        <nav className='flex items-center justify-between flex-wrap p-6'>
+                <Logo/>
                 <LaunchResearch/>
                 <PlaceAd/>
                 <Login/>

@@ -3,9 +3,7 @@ import React from 'react';
 const LaunchResearch = () => {
     return (
         <div>
-            <p>
-                Lancer la recherche
-            </p>
+        <a>Lancer la recherche</a>
         </div>
     );
 };
