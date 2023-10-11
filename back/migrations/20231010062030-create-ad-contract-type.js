@@ -4,18 +4,17 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('AdContractTypes', {
       id: {
-        allowNull: false,
-        primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        primaryKey: true,
+        defaultValue: Sequelize.UUIDV4,
       },
       adId: {
-        allowNull: false,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        allowNull: false
       },
       contractTypeId: {
-        allowNull: false,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +27,30 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
+    });
+    
+    await queryInterface.addConstraint('AdContractTypes', {
+      type: 'foreign key',
+      fields: ['contractTypeId'],
+      name: 'fk_adcontracttypes_contract',
+      references: {
+        table: 'ContractTypes',
+        field: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
+    
+    await queryInterface.addConstraint('AdContractTypes', {
+      type: 'foreign key',
+      fields: ['adId'],
+      name: 'fk_adcontracttypes_ad',
+      references: {
+        table: 'Ads',
+        field: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     });
   },
   async down(queryInterface, Sequelize) {

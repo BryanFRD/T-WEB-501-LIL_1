@@ -9,11 +9,19 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ContractType.init({
-    firstname: DataTypes.STRING,
-    lastname: DataTypes.STRING
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    name: {
+      type:DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'ContractType',
+    paranoid: true
   });
   return ContractType;
 };

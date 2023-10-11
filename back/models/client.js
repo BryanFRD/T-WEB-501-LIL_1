@@ -5,14 +5,29 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Client extends Model {
     static associate(models) {
-      
+      Client.belongsTo(models.UserData);
     }
   }
   Client.init({
-    firstname: DataTypes.STRING,
-    lastname: DataTypes.STRING,
-    phonenumber: DataTypes.STRING,
-    description: DataTypes.STRING
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    firstname: {
+      type:DataTypes.STRING,
+      allowNull: false
+    },
+    lastname: {
+      type:DataTypes.STRING,
+      allowNull: false
+    },
+    phonenumber: {
+      type: DataTypes.STRING
+    },
+    description: {
+      type: DataTypes.STRING
+    }
   }, {
     sequelize,
     modelName: 'Client',

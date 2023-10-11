@@ -4,13 +4,13 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Companies', {
       id: {
-        allowNull: false,
-        primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        primaryKey: true,
+        defaultValue: Sequelize.UUIDV4,
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       description: {
         type: Sequelize.STRING
@@ -32,6 +32,18 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
+    });
+    
+    await queryInterface.addConstraint('Companies', {
+      type: 'foreign key',
+      fields: ['associatedId'],
+      name: 'fk_company_userdata',
+      references: {
+        table: 'UserData',
+        field: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     });
   },
   async down(queryInterface, Sequelize) {

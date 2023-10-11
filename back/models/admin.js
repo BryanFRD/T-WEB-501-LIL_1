@@ -5,12 +5,23 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Admin extends Model {
     static associate(models) {
-      
+      Admin.belongsTo(models.UserData);
     }
   }
   Admin.init({
-    firstname: DataTypes.STRING,
-    lastname: DataTypes.STRING
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    firstname: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    lastname: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Admin',

@@ -4,16 +4,17 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Appliers', {
       id: {
-        allowNull: false,
-        primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        primaryKey: true,
+        defaultValue: Sequelize.UUIDV4,
       },
       firstname: {
         type: Sequelize.STRING,
+        allowNull: false
       },
       lastname: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       email: {
         type: Sequelize.STRING,
@@ -24,6 +25,10 @@ module.exports = {
       },
       description: {
         type: Sequelize.STRING
+      },
+      adId: {
+        type: Sequelize.UUID,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -36,6 +41,18 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
+    });
+    
+    await queryInterface.addConstraint('Appliers', {
+      type: 'foreign key',
+      fields: ['adId'],
+      name: 'fk_appliers_ad',
+      references: {
+        table: 'Ads',
+        field: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     });
   },
   async down(queryInterface, Sequelize) {

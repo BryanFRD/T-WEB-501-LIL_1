@@ -4,16 +4,23 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Ads', {
       id: {
-        allowNull: false,
-        primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        primaryKey: true,
+        defaultValue: Sequelize.UUIDV4,
+        allowNull: false
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      status: {
+        type: Sequelize.ENUM('OPEN', 'CLOSED'),
+        defaultValue: 'OPEN',
+        allowNull: false
       },
       companyId: {
         type: Sequelize.UUID,
@@ -30,6 +37,18 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
+    });
+    
+    await queryInterface.addConstraint('Ads', {
+      type: 'foreign key',
+      fields: ['companyId'],
+      name: 'fk_ads_company',
+      references: {
+        table: 'Companies',
+        field: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     });
   },
   async down(queryInterface, Sequelize) {

@@ -1,6 +1,8 @@
-const database = require("./models/index.js");
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
+const routes = require("./routes/index.js");
+const authenticateToken = require('./middlewares/authentication.middleware.js');
 const corsOptions = {
   origin: "http://localhost:8081"
 };
@@ -8,26 +10,14 @@ const corsOptions = {
 const start = async () => {
   const app = express();
   
-  // const err = await database.sync({force: false})
-  //   .then(() => {console.log('Database synchronized!')})
-  //   .catch(err => err);
-  
-  // if(err){
-  //   console.log(`Error while trying to synchronize with the database!\nError: `, err);
-  //   return;
-  // }
-  
-  database.sequelize.models.UserData.create({
-    email: 'test'
-  });
-  
   app.use(cors(corsOptions));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+  app.use(authenticateToken);
   
-  app.get("/", (req, res) => {
-    res.json({ message: "Welcome to bezkoder application." });
-  });
+  for (const route in routes) {
+    app.use(`/`, routes[route]);
+  }
 
   const PORT = process.env.PORT || 3002;
   app.listen(PORT, () => {
