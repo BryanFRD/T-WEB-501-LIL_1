@@ -9,7 +9,8 @@ const Navbar = () => {
 
     return (
         <>
-        <nav className='flex items-center justify-between flex-wrap p-6'>
+        <nav className='grid grid-flow-rows auto-rows-max gap-3
+        md:grid md:grid-rows-1 md:grid-cols-6'>
                 <Logo/>
                 <LaunchResearch/>
                 <PlaceAd/>
