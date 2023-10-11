@@ -19,10 +19,19 @@ class AuthValidator extends BaseValidator {
       description: Joi.string().required(),
       name: Joi.string().required(),
     }).required(),
-  );
+  ).required();
+  
+  #login = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().min(5).required(),
+  });
   
   validateRegister = (data, options) => {
     return this.validate(this.#register, data, options);
+  }
+  
+  validateLogin = (data, options) => {
+    return this.validate(this.#login, data, options);
   }
   
 }
