@@ -1,9 +1,9 @@
 const BaseController = require('./base.controller');
 
-class UserDataController extends BaseController {
+class ClientController extends BaseController {
   
   constructor(){
-    super('UserData');
+    super('Client');
   }
   
   create = (req, res) => {
@@ -16,4 +16,4 @@ class UserDataController extends BaseController {
   
 }
 
-module.exports = UserDataController;
+module.exports = ClientController;
