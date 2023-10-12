@@ -1,13 +1,11 @@
 const Joi = require('joi');
 const BaseValidator = require('./base.validator');
 
-class ClientValidator extends BaseValidator {
+class AdminValidator extends BaseValidator {
   
   #create = Joi.object({
     firstname: Joi.string().required(),
     lastname: Joi.string().required(),
-    phonenumber: Joi.string(),
-    description: Joi.string(),
     associatedId: Joi.string().uuid(),
   }).required();
   
@@ -15,12 +13,10 @@ class ClientValidator extends BaseValidator {
     id: Joi.string().uuid().required(),
     firstname: Joi.string(),
     lastname: Joi.string(),
-    phonenumber: Joi.string(),
-    description: Joi.string(),
     associatedId: Joi.string().uuid(),
   }).required();
   
-  validateCreate = (data, options) => {
+  valideCreate = (data, options) => {
     return this.validate(this.#create, data, options);
   }
   
@@ -30,4 +26,4 @@ class ClientValidator extends BaseValidator {
   
 }
 
-module.exports = ClientValidator;
+module.exports = AdminValidator;

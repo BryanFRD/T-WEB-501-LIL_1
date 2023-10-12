@@ -24,7 +24,7 @@ class AuthValidator extends BaseValidator {
   #login = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().min(5).required(),
-  });
+  }).required();
   
   validateRegister = (data, options) => {
     return this.validate(this.#register, data, options);

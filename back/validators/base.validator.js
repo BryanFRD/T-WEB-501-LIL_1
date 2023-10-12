@@ -6,8 +6,26 @@ class BaseValidator {
     id: Joi.string().uuid().required()
   }).required();
   
+  #findAll = Joi.object({
+    name: Joi.string().uuid(),
+    offset: Joi.number().min(0),
+    limit: Joi.number().min(1).max(100),
+  }).required();
+  
+  #delete = Joi.object({
+    id: Joi.string().uuid().required()
+  }).required();
+  
   validateFindByPk = (data, options) => {
     return this.validate(this.#findByPk, data, options);
+  }
+  
+  validateFindAll = (data, options) => {
+    return this.validate(this.#findAll, data, options);
+  }
+  
+  validateDelete = (data, options) => {
+    return this.validate(this.#delete, data, options);
   }
   
   validate = (schema, data, options = {stripUnknown: true, abortEarly: false}) => {
