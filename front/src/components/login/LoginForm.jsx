@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Input from '../form/Input';
 import Api from '../../api/Api';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../contexts/UserContext';
 
 const LoginForm = () => {
+  const {setUser} = useContext(UserContext);
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
   
@@ -13,7 +15,13 @@ const LoginForm = () => {
     const data = Object.fromEntries(new FormData(e.currentTarget));
     setErrors([]);
     Api.post('/auth/login', data)
-      .then(({data}) => {
+      .then(async ({data}) => {
+        const isAdmin = await Api.post('/auth/isAdmin').then(() => true).catch(() => false);
+      
+        data.model.isAdmin = isAdmin;
+        data.model.isCompany = data.model?.name;
+      
+        setUser(data.model);
         toast.success('Connecté !');
         navigate('/');
       })

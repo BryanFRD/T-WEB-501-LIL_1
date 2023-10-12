@@ -4,6 +4,7 @@ const cors = require("cors");
 const routes = require("./routes/index.js");
 const authenticateToken = require('./middlewares/authentication.middleware.js');
 const cookieParser = require('cookie-parser');
+const generate = require('./config/generator.js');
 const corsOptions = {
   origin: ["http://127.0.0.1:5173", "http://localhost:5173"],
   credentials: true
@@ -20,6 +21,10 @@ const start = async () => {
   
   for (const route in routes) {
     app.use(`/`, routes[route]);
+  }
+  
+  if(process.env.NODE_ENV !== 'production'){
+    generate()
   }
 
   const PORT = process.env.PORT || 3002;

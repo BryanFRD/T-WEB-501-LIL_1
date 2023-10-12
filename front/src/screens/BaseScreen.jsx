@@ -5,9 +5,9 @@ import Header from '../components/header/Header';
 
 const BaseScreen = () => {
   return (
-    <>
+    <div className='flex flex-col min-h-screen'>
       <Header />
-      <main>
+      <main className='flex-grow'>
         <Outlet />
       </main>
       <footer></footer>
@@ -15,7 +15,7 @@ const BaseScreen = () => {
         position="bottom-right"
         reverseOrder={true}
       />
-    </>
+    </div>
   );
 };
 

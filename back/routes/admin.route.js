@@ -1,12 +1,13 @@
 const router = require('express').Router();
-const AdController = require('../controllers/ad.controller.js');
+const AdminController = require('../controllers/admin.controller.js');
 
-const adController = new AdController();
+const adminController = new AdminController();
 
-router.get('/admins', adController.findAll);
-router.get('/admins/:id', adController.findByPk);
-router.post('/admins', adController.create);
-router.put('/admins/:id', adController.update);
-router.delete('/admins/:id', adController.delete);
+router.get('/admins', adminController.findAll);
+router.get('/admins/:id', adminController.findByPk);
+router.post('/admins', adminController.create);
+router.put('/admins/:id', adminController.update);
+router.delete('/admins/:id', adminController.delete);
+router.get('/admins/isadmin', adminController.isAdmin);
 
 module.exports = router;

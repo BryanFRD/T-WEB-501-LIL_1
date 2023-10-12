@@ -11,6 +11,10 @@ const UserContextProvider = (props) => {
     
     const refreshUser = async () => {
       const userAccount = await Api.post('/auth/refresh').then(({data}) => data.model).catch(() => null);
+      const isAdmin = await Api.post('/auth/isAdmin').then(() => true).catch(() => false);
+      
+      userAccount.isAdmin = isAdmin;
+      userAccount.isCompany = userAccount?.name;
       
       setUser(userAccount);
     }

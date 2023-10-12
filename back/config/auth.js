@@ -5,6 +5,7 @@ const config = {
     'PUT/admins': ({isAdmin}) => isAdmin,
     'DELETE/admins': ({isAdmin}) => isAdmin,
     'GET/userdata': ({isAdmin}) => isAdmin,
+    'GET/admin/isadmin': ({isAdmin}) => isAdmin,
   }
 }
 
