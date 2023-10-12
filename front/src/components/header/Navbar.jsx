@@ -16,7 +16,8 @@ const Navbar = () => {
         md:grid md:grid-rows-1 md:grid-cols-6'>
                 <Logo/>
                 <LaunchResearch/>
-                <PlaceAd/>
+                {user?.name && <PlaceAd/>}
+
                 {user ?
                     (<ConnectedDropdown />)
                     :
