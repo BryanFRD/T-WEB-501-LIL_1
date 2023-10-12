@@ -4,7 +4,7 @@ import SearchBar from '../components/SearchBar';
 
 const HomeScreen = () => {
   return (
-    <div>
+    <div className='pt-4 flex items-center justify-center'>
       <SearchBar></SearchBar>
     </div>
   );
