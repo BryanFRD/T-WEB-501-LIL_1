@@ -7,14 +7,6 @@ class AdController extends BaseController {
     super('Ad', new AdValidator());
   }
   
-  create = (req, res) => {
-    
-  }
-  
-  update = (req, res) => {
-    
-  }
-  
 }
 
 module.exports = AdController;

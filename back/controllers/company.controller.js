@@ -7,14 +7,6 @@ class CompanyController extends BaseController {
     super('Company', new CompanyValidator());
   }
   
-  create = (req, res) => {
-    
-  }
-  
-  update = (req, res) => {
-    
-  }
-  
 }
 
 module.exports = CompanyController;

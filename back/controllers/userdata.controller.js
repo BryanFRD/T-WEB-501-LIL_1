@@ -7,14 +7,6 @@ class UserDataController extends BaseController {
     super('UserData', new UserDataValidator());
   }
   
-  create = (req, res) => {
-    
-  }
-  
-  update = (req, res) => {
-    
-  }
-  
 }
 
 module.exports = UserDataController;

@@ -7,14 +7,6 @@ class ApplierController extends BaseController {
     super('Applier', new ApplierValidator());
   }
   
-  create = (req, res) => {
-    
-  }
-  
-  update = (req, res) => {
-    
-  }
-  
 }
 
 module.exports = ApplierController;

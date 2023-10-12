@@ -7,14 +7,6 @@ class ContractTypeController extends BaseController {
     super('ContractType', new ContractTypeValidator());
   }
   
-  create = (req, res) => {
-    
-  }
-  
-  update = (req, res) => {
-    
-  }
-  
 }
 
 module.exports = ContractTypeController;

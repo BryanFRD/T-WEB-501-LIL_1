@@ -7,14 +7,6 @@ class ClientController extends BaseController {
     super('Client', new ClientValidator());
   }
   
-  create = (req, res) => {
-    
-  }
-  
-  update = (req, res) => {
-    
-  }
-  
 }
 
 module.exports = ClientController;
