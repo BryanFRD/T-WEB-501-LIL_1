@@ -4,8 +4,8 @@ import Subscribe from './Subscribe';
 import LaunchResearch from './LaunchResearch';
 import PlaceAd from './PlaceAd';
 import Logo from './Logo'
-import {UserContext} from '../contexts/UserContext'
-import ConnectedDropdown from './navbar/ConnectedDropdown';
+import {UserContext} from '../../contexts/UserContext'
+import ConnectedDropdown from './ConnectedDropdown';
 
 const Navbar = () => {
     const {user} = useContext(UserContext);
