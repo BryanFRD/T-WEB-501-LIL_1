@@ -8,4 +8,4 @@ npx sequelize-cli db:create
 npx sequelize-cli db:migrate
 
 ### Start node server
-npm start
+npm run dev
