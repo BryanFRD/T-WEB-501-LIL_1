@@ -25,7 +25,7 @@ const SearchBar = () => {
             </div>
             <div className='flex items-center gap-1 shadow appearance-none border rounded w-auto py-2 px-3'>
                 <SearchIcon/>
-                <p className='md:hidden'>Lancer la recherche</p>
+                <p className='md:hidden'>Rechercher</p>
             </div>
         </div>
     );
