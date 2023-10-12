@@ -15,7 +15,7 @@ class AuthValidator extends BaseValidator {
     Joi.object({
       email: Joi.string().email().required(),
       password: Joi.string().min(5).required(),
-      phonenumber: Joi.string().required(),
+      phonenumber: Joi.string(),
       description: Joi.string(),
       name: Joi.string().required(),
     }).required(),
