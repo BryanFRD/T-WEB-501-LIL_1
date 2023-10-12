@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Login from './Login';
 import Subscribe from './Subscribe';
 import LaunchResearch from './LaunchResearch';
 import PlaceAd from './PlaceAd';
 import Logo from './Logo'
+import {UserContext} from '../contexts/UserContext'
+import ConnectedDropdown from './navbar/ConnectedDropdown';
 
 const Navbar = () => {
-
+    const {user} = useContext(UserContext);
+    
     return (
         <>
         <nav className='grid grid-flow-rows auto-rows-max gap-3
@@ -14,8 +17,14 @@ const Navbar = () => {
                 <Logo/>
                 <LaunchResearch/>
                 <PlaceAd/>
-                <Login/>
-                <Subscribe/>
+                {user ?
+                    (<ConnectedDropdown />)
+                    :
+                    (<>
+                        <Login/>
+                        <Subscribe/>
+                    </>)
+                }
         </nav>
         </>
     );
