@@ -32,7 +32,7 @@ const DisplayCards = () => {
     return (
         <div className='flex flex-col pt-6 gap-3 text-center w-5/6
         md:grid md:grid-cols-3 md:w-11/12'>
-            {TestData.map(data => (<AdCards ad={data}></AdCards>))}
+            {TestData.map(data => (<AdCards ad={data} key={data.id}></AdCards>))}
         </div>
     );
 };

@@ -3,6 +3,7 @@ import BaseScreen from './screens/BaseScreen'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
+import PlaceAdScreen from './screens/PlaceAdScreen'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
           <Route index element={<HomeScreen />}/>
           <Route path='login' element={<LoginScreen />}/>
           <Route path='register' element={<RegisterScreen />}/>
+          <Route path='place_ad' element={<PlaceAdScreen/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
