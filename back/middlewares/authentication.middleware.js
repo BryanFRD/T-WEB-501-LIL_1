@@ -25,7 +25,7 @@ const authenticateToken = async (req, res, next) => {
       .catch(() => null);
       
     if(!userData || userData.updatedAt !== userToken.updatedAt){
-      res.cookie('token', '', {expires: new Date(0)});
+      res.clearCookie('token');
       return next();
     }
     

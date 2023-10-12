@@ -79,7 +79,7 @@ class AuthController {
         }
         
         if(!user) {
-          res.cookie('token', '', {expires: new Date(0)});
+          res.clearCookie('token');
           return res.status(400).json({success: false, message: 'User not found'});
         }
         
@@ -92,7 +92,8 @@ class AuthController {
   }
   
   logout = (req, res) => {
-    res.cookie('token', '', {expires: new Date(0)});
+    res.clearCookie('token');
+    return res.sendStatus(200);
   }
   
   refresh = async (req, res) => {
@@ -113,7 +114,7 @@ class AuthController {
     await sequelize.models.UserData.findByPk(token.id)
       .then(async data => {
         if(Date.parse(data.updatedAt) != Date.parse(token.updatedAt)){
-          // res.cookie('token', '', {expires: new Date(0)});
+          res.clearCookie('token');
           return res.status(400).json({success: false, message: 'Token outdated'}); 
         }
         
@@ -133,7 +134,7 @@ class AuthController {
         }
         
         if(!user) {
-          res.cookie('token', '', {expires: new Date(0)});
+          res.clearCookie('token');
           return res.status(400).json({success: false, message: 'User not found'});
         }
         

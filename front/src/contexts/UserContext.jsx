@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Api, { handleLogout } from '../api/Api';
+import Api from '../api/Api';
 
 export const UserContext = React.createContext();
 
@@ -13,15 +13,15 @@ const UserContextProvider = (props) => {
       const userAccount = await Api.post('/auth/refresh').then(({data}) => data.model).catch(() => null);
       
       setUser(userAccount);
-      
-      console.log('user:',  userAccount);
     }
     
     refreshUser();
   }, []);
   
   const handleLogout = () => {
-    Api.delete('/auth/logout').finally(() => setUser(null));
+    console.log('logout')
+    Api.delete('/auth/logout').then(res => console.log(res)).catch((err) => console.log(err)).finally(() => setUser(null));
+    
   }
   
   return (
