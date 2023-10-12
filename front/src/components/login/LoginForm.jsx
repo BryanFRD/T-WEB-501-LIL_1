@@ -18,7 +18,6 @@ const LoginForm = () => {
         navigate('/');
       })
       .catch(({data}) => {
-        console.log('data:', data);
         if(!data?.message?.details){
           toast.error('Email ou mot de passe introuvable !');
           return;

@@ -7,6 +7,14 @@ class UserDataController extends BaseController {
     super('UserData', new UserDataValidator());
   }
   
+  findByPk = (req, res) => {
+    if(!req.user?.id || req.params.id != req.user.id){
+      return res.status(401).json({success: false, message: 'Unauthorized'});
+    }
+    
+    return this.findByPkBase(req, res);
+  }
+  
 }
 
 module.exports = UserDataController;
