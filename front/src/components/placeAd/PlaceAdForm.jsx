@@ -9,8 +9,9 @@ const PlaceAdForm = () => {
             <div>
                 <form>
                     <div className='flex gap-2'>
-                        <label for='title'>Titre de votre annonce :</label>
-                        <input className='' type='text' id='title' required />
+                        <label className='' for='title'>Titre de votre annonce :</label>
+                        <input  className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
+                        ' type='text' id='title' required />
                     </div>
                 </form>
             </div>
