@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
+import { Link } from 'react-router-dom';
 
 const AdCards = ({ad}) => {
 
@@ -12,7 +13,7 @@ const AdCards = ({ad}) => {
                 <p className='truncate'>{ad.description}</p>
            </div>
            <div className='flex justify-center gap-3'>
-                <button className='bg-black text-white rounded p-1'><strong>Plus</strong></button>
+                <Link to={'ad_details/' + ad?.id} className='bg-black text-white rounded p-1'><strong>Plus</strong></Link>
                 {!user?.name && <button className='border-2 rounded p-1 border-solid border-black'>Candidater</button>}
            </div>
         </div>
