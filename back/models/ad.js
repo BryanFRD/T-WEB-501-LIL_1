@@ -24,6 +24,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    wages: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    place: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    workingTime: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     status: {
       type: DataTypes.ENUM('OPEN', 'CLOSED'),
       defaultValue: 'OPEN',

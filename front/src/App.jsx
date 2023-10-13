@@ -7,6 +7,7 @@ import PlaceAdScreen from './screens/PlaceAdScreen'
 import { useContext, useEffect } from 'react'
 import { UserContext } from './contexts/UserContext'
 import ErrorScreen from './screens/ErrorScreen'
+import AdminScreen from './screens/AdminScreen'
 
 function App() {
   const {user} = useContext(UserContext);
@@ -24,6 +25,9 @@ function App() {
           )}
           {user?.isCompany &&
             <Route path='place_ad' element={<PlaceAdScreen/>}/>
+          }
+          {user?.isAdmin &&
+            <Route path='admin' element={<AdminScreen />}/>
           }
           <Route path='*' element={<ErrorScreen/>}/>
         </Route>

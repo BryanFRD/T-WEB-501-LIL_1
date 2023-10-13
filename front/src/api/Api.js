@@ -9,7 +9,7 @@ const Api = axios.create({
 
 Api.interceptors.response.use(response => response, async error => {
   const originalRequest = error.config;
-  if(!error.config.url.includes('/auth/') && error.response.status === 401 && !originalRequest.retry){
+  if(!error.config.url.includes('/auth/') && error.response?.status === 401 && !originalRequest.retry){
     originalRequest.retry = true;
     
     refreshToken();

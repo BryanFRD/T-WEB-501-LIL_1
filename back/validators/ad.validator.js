@@ -9,6 +9,9 @@ class AdValidator extends BaseValidator {
     status: Joi.string().default('active'),
     contractType: Joi.array().items(Joi.string()).required(),
     companyId: Joi.string().uuid().required(),
+    wages: Joi.string().required(),
+    place: Joi.string().required(),
+    workingTime: Joi.string().required()
   }).required();
   
   #update = Joi.object({
@@ -16,6 +19,9 @@ class AdValidator extends BaseValidator {
     description: Joi.string(),
     status: Joi.string(),
     contactType: Joi.array().items(Joi.string()),
+    wages: Joi.string(),
+    place: Joi.string(),
+    workingTime: Joi.string()
   }).required();
   
   validateCreate = (data, options) => {

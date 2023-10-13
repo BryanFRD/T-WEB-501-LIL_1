@@ -16,7 +16,7 @@ const LoginForm = () => {
     setErrors([]);
     Api.post('/auth/login', data)
       .then(async ({data}) => {
-        const isAdmin = await Api.post('/auth/isAdmin').then(() => true).catch(() => false);
+        const isAdmin = await Api.get('/auth/isadmin').then(() => true).catch(() => false);
       
         data.model.isAdmin = isAdmin;
         data.model.isCompany = data.model?.name;
