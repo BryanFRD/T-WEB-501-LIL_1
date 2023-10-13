@@ -5,7 +5,7 @@ const Logo = () => {
         <div className='
         md:col-span-1'>
             <img className='w-24 h-auto m-auto' 
-            src="/logo.png"/>
+            src="/logo2.png"/>
         </div>
     );
 };

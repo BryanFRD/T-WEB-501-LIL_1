@@ -12,8 +12,8 @@ const AdCards = ({ad}) => {
                 <p className='truncate'>{ad.description}</p>
            </div>
            <div className='flex justify-center gap-3'>
-                <button className='bg-black text-white rounded p-1'><strong>Learn more</strong></button>
-                {!user?.name && <button className='border-2 rounded p-1 border-solid border-black'>Apply</button>}
+                <button className='bg-black text-white rounded p-1'><strong>Plus</strong></button>
+                {!user?.name && <button className='border-2 rounded p-1 border-solid border-black'>Candidater</button>}
            </div>
         </div>
     );
