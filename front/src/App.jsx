@@ -7,6 +7,7 @@ import PlaceAdScreen from './screens/PlaceAdScreen'
 import { useContext, useEffect } from 'react'
 import { UserContext } from './contexts/UserContext'
 import ErrorScreen from './screens/ErrorScreen'
+import DisplayDetailsScreen from './screens/DisplayDetailsScreen'
 
 function App() {
   const {user} = useContext(UserContext);

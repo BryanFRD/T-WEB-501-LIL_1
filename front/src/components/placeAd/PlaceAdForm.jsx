@@ -25,7 +25,7 @@ const PlaceAdForm = () => {
                     <div className='flex gap-2'>
                         <label className='mt-auto mb-auto basis-1/5' 
                         for='title'>Titre de votre annonce :</label>
-                        <input  className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
+                        <input className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
                         overflow-auto basis-4/5' type='text' id='title' required />
                     </div>
                     <div className='flex gap-2'>
@@ -41,6 +41,31 @@ const PlaceAdForm = () => {
                         <AsyncSelect cacheOptions loadOptions={loadContractType} defaultOptions
                         isMulti id='contractType'
                         className='basis-4/5' required/>
+                    </div>
+                    <div className='flex gap-2'>
+                        <label for='wages'
+                        className='mt-auto mb-auto basis-1/5'>Rémunération :</label>
+                        <input id='wages' type='text'
+                        className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
+                        overflow-auto basis-4/5' required/>
+                    </div>
+                    <div className='flex gap-2'>
+                        <label for='place'
+                        className='mt-auto mb-auto basis-1/5'>Lieu :</label>
+                        <input id='place' type='text'
+                        className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
+                        overflow-auto basis-4/5' required/>
+                    </div>
+                    <div className='flex gap-2'>
+                        <label for='workingTime'
+                        className='mt-auto mb-auto basis-1/5'>Horaires de travail :</label>
+                        <input id='workingTime' type='text'
+                        className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
+                        overflow-auto basis-4/5' required/>
+                    </div>
+                    <div>
+                        <button type='submit'
+                        className='bg-black rounded text-white p-2'><strong>Déposer une annonce</strong></button>
                     </div>
                 </form>
             </div>
