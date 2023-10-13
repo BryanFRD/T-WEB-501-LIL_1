@@ -35,9 +35,12 @@ const PlaceAdForm = () => {
                         className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
                         overflow-auto basis-4/5' required></textarea>
                     </div>
-                    <div>
-                    <AsyncSelect cacheOptions loadOptions={loadContractType} defaultOptions
-                    isMulti />
+                    <div className='flex gap-2'>
+                        <label for='contractType'
+                        className='mt-auto mb-auto basis-1/5'>Type de contrat :</label>
+                        <AsyncSelect cacheOptions loadOptions={loadContractType} defaultOptions
+                        isMulti id='contractType'
+                        className='basis-4/5' required/>
                     </div>
                 </form>
             </div>
