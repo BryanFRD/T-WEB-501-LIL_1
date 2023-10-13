@@ -17,6 +17,18 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      wages: {
+        type: Sequelzie.STRING,
+        allowNull: false
+      },
+      place: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      workingTime: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       status: {
         type: Sequelize.ENUM('OPEN', 'CLOSED'),
         defaultValue: 'OPEN',

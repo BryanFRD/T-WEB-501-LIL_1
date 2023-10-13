@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const authConfig = require('../config/auth.js');
+const {sequelize} = require('../models');
+const Logger = require('../helpers/logger.helper.js');
 
 const authenticateToken = async (req, res, next) => {
   const method = req.method;
@@ -9,7 +11,7 @@ const authenticateToken = async (req, res, next) => {
   const restrictedRoute = authConfig.RESTRICTED_ROUTES[routeName];
   
   if(restrictedRoute){
-    const token = req.cookie?.token;
+    const token = req.cookies?.token;
     
     if(!token){
       return res.status(401).json({success: false, message: 'Unanthorized'});
@@ -23,10 +25,10 @@ const authenticateToken = async (req, res, next) => {
     const userData = await sequelize.models.UserData.findByPk(userToken.id)
       .then((data) => data)
       .catch(() => null);
-      
-    if(!userData || userData.updatedAt !== userToken.updatedAt){
-      res.clearCookie('token');
-      return next();
+    
+    if(!userData || Date.parse(userData.updatedAt) !== Date.parse(userToken.updatedAt)){
+      setCookies(res, '');
+      return res.status(401).json({success: false, message: 'Unanthorized'});
     }
     
     let user = await sequelize.models.Client.findOne({where: {associatedId: userData.id}})
@@ -42,19 +44,19 @@ const authenticateToken = async (req, res, next) => {
       user = await sequelize.models.Admin.findOne({where: {associatedId: userData.id}})
         .then((user) => user)
         .catch(() => null);
+      user.isAdmin = true;
     }
     
-    if(user && restrictedRoute({user, body: req.body, isAdmin: req.isAdmin ?? false})){
+    if(user && restrictedRoute({user, body: req.body ?? {}})){
       req.user = user;
       req.user.isAdmin = req.isAdmin ?? false;
       return next();
     }
-    
   } else {
     return next();
   }
   
-  return res.sendStatus(401);
+  return res.status(401).json({success: false, message: 'Unanthorized'});
 }
 
 module.exports = authenticateToken;

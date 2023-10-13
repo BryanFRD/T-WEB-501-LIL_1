@@ -8,6 +8,10 @@ class AuthController {
     this.validator = new AuthValidator();
   }
   
+  isAdmin = (req, res) => {
+    return res.status(200).json({success: true, message: 'Admin'});
+  }
+  
   validateAccount = (req, res) => {
     
   }
@@ -79,13 +83,13 @@ class AuthController {
         }
         
         if(!user) {
-          res.clearCookie('token');
+          setCookies(res, '');
           return res.status(400).json({success: false, message: 'User not found'});
         }
         
         const token = jwt.sign({id: userData.id, updatedAt: userData.updatedAt}, process.env.TOKEN, {expiresIn: 86400});
         
-        res.cookie('token', token, {secure: process.env.NODE_ENV !== 'development', sameSite: 'none'});
+        setCookies(res, token);
         return res.status(200).json({success: true, message: 'Logged in', model: user});
       })
       .catch((err) => res.status(400).json({success: false, message: err.message}));
@@ -114,7 +118,7 @@ class AuthController {
     await sequelize.models.UserData.findByPk(token.id)
       .then(async data => {
         if(Date.parse(data.updatedAt) != Date.parse(token.updatedAt)){
-          res.clearCookie('token');
+          setCookies(res, '');
           return res.status(400).json({success: false, message: 'Token outdated'}); 
         }
         
@@ -134,13 +138,12 @@ class AuthController {
         }
         
         if(!user) {
-          res.clearCookie('token');
+          setCookies(res, '');
           return res.status(400).json({success: false, message: 'User not found'});
         }
         
         const newToken = jwt.sign({id: data.id, updatedAt: data.updatedAt}, process.env.TOKEN, {expiresIn: 86400});
-        
-        res.cookie('token', newToken, {secure: process.env.NODE_ENV !== 'development', sameSite: 'none'});
+        setCookies(res, newToken);
         return res.status(200).json({success: true, model: user});
       })
       .catch(err => {

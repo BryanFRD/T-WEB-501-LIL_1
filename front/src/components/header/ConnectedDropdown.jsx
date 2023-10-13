@@ -21,17 +21,26 @@ const ConnectedDropdown = () => {
       <div className={`z-10 mt-4 right-2 ${collapse && 'hidden'} absolute font-normal bg-slate-50 divide-y divide-gray-100 rounded-lg shadow w-44 dark:divide-gray-600`}>
           <ul className="py-2 text-sm text-dark" aria-labelledby="dropdownLargeButton">
             <li>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-200">Dashboard</a>
-            </li>
-            <li>
               <a href="#" className="block px-4 py-2 hover:bg-gray-200">Settings</a>
             </li>
-            <li>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-200">Earnings</a>
-            </li>
+            {(user && (!user.isCompany || user.isAdmin)) &&
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-200">Mes&nbsp;candidatures</a>
+              </li>
+            }
+            {(user?.isCompany || user?.isAdmin) &&
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-200">Mes&nbsp;annonces</a>
+              </li>
+            }
+            {user?.isAdmin &&
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-200">Admin</a>
+              </li>
+            }
           </ul>
           <div className="py-1">
-            <button className="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-gray-200" onClick={handleLogout}>Sign out</button>
+            <button className="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-gray-200" onClick={handleLogout}>Déconnexion</button>
           </div>
       </div>
     </div>
