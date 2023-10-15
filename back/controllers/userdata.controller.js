@@ -8,11 +8,11 @@ class UserDataController extends BaseController {
   }
   
   findByPk = (req, res) => {
-    if(!req.user?.id || req.params.id != req.user.id){
-      return res.status(401).json({success: false, message: 'Unauthorized'});
+    if(req.user?.isAdmin || req.user?.id === req.params.id){
+      return super.findByPk(req, res);
     }
     
-    return this.findByPkBase(req, res);
+    return res.status(401).json({success: false, message: 'Unauthorized'});
   }
   
 }

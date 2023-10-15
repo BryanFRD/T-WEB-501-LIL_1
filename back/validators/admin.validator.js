@@ -6,6 +6,7 @@ class AdminValidator extends BaseValidator {
   #create = Joi.object({
     firstname: Joi.string().required(),
     lastname: Joi.string().required(),
+    name: Joi.string().required(),
     associatedId: Joi.string().uuid(),
   }).required();
   
@@ -13,10 +14,12 @@ class AdminValidator extends BaseValidator {
     id: Joi.string().uuid().required(),
     firstname: Joi.string(),
     lastname: Joi.string(),
+    name: Joi.string(),
     associatedId: Joi.string().uuid(),
+    deleted: Joi.boolean().default(false),
   }).required();
   
-  valideCreate = (data, options) => {
+  validateCreate = (data, options) => {
     return this.validate(this.#create, data, options);
   }
   

@@ -7,6 +7,23 @@ class AdminController extends BaseController {
     super('Admin', new AdminValidator());
   }
   
+  findAll (req, res) {
+    const response = this.validator.validateFindAll(req.datas);
+    const data = response?.value;
+    
+    if(!data){
+      return res.status(400).json({success: false, message: response.error});
+    }
+    
+    this.model.findAndCountAll({
+      paranoid: !data.deleted,
+    })
+      .then((data) => res.status(200).json({success: true, models: data.rows, total: data.count}))
+      .catch((err) => {
+        res.status(400).json({success: false, message: err.message})
+      });
+  }
+  
 }
 
 module.exports = AdminController;

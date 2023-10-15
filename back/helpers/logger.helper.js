@@ -1,3 +1,5 @@
+const config = require('../config/config');
+
 class Logger {
   
   //? NodeJS colors
@@ -33,24 +35,45 @@ class Logger {
   }
   
   static success = (...messages) => {
+    if(!config.logger.succes)
+      return;
+    
     console.log(`${this.#FgGreen}%s`, ...messages, `${this.#Reset}`);
   }
   
   static error = (...messages) => {
+    if(!config.logger.error)
+      return;
+    
     console.log(`${this.#FgRed}%s`, ...messages, `${this.#Reset}`);
   }
   
   static warn = (...messages) => {
+    if(!config.logger.warn)
+      return;
+    
     console.log(`${this.#FgYellow}%s`, ...messages, `${this.#Reset}`);
   }
   
   static info = (...messages) => {
+    if(!config.logger.info)
+      return;
+    
     console.log(`${this.#FgBlue}%s`, ...messages, `${this.#Reset}`);
   }
   
   static sql = (...messages) => {
-    return;
+    if(!config.logger.sql)
+      return;
+    
     console.log(`${this.#FgBlack}%s`, ...messages, `${this.#Reset}`);
+  }
+  
+  static route = (...messages) => {
+    if(!config.logger.route)
+      return;
+    
+      console.log(`${this.#FgMagenta}%s`, ...messages, `${this.#Reset}`)
   }
   
 }

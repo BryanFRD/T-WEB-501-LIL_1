@@ -4,11 +4,20 @@ const {sequelize} = require('../models');
 const Logger = require('../helpers/logger.helper.js');
 
 const authenticateToken = async (req, res, next) => {
+  req.datas = {...(req.query ?? {}), ...(req.params ?? {}), ...(req.body ?? {})}
   const method = req.method;
   const url = req.url.replace(/\/+$/, '').split('?')[0];
+  const splittedUrl = url.split('/');
+  if(splittedUrl.length > 2){
+    const isUuid = splittedUrl[2].match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/);
+    if(isUuid)
+      splittedUrl[2] = ':id';
+  }
   
-  const routeName = `${method.toUpperCase()}${url.toLowerCase()}`;
+  const routeName = `${method.toUpperCase()}${splittedUrl.join('/').toLowerCase()}`;
   const restrictedRoute = authConfig.RESTRICTED_ROUTES[routeName];
+  
+  Logger.route(routeName, Boolean(restrictedRoute), req.datas);
   
   if(restrictedRoute){
     const token = req.cookies?.token;
@@ -44,12 +53,14 @@ const authenticateToken = async (req, res, next) => {
       user = await sequelize.models.Admin.findOne({where: {associatedId: userData.id}})
         .then((user) => user)
         .catch(() => null);
-      user.isAdmin = true;
+      
+      if(user)
+        user.isAdmin = true;
     }
     
     if(user && restrictedRoute({user, body: req.body ?? {}})){
       req.user = user;
-      req.user.isAdmin = req.isAdmin ?? false;
+      req.user.isAdmin = user.isAdmin ?? false;
       return next();
     }
   } else {
