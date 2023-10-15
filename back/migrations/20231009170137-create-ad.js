@@ -18,7 +18,7 @@ module.exports = {
         allowNull: false
       },
       wages: {
-        type: Sequelzie.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       place: {
