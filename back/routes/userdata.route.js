@@ -8,5 +8,6 @@ router.get('/userdata/:id', userDataController.findByPk);
 router.post('/userdata', userDataController.create);
 router.put('/userdata/:id', userDataController.update);
 router.delete('/userdata/:id', userDataController.delete);
+router.delete('/userdata/:id/restore', userDataController.restore);
 
 module.exports = router;

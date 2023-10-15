@@ -8,5 +8,6 @@ router.get('/ads/:id', adController.findByPk);
 router.post('/ads', adController.create);
 router.put('/ads/:id', adController.update);
 router.delete('/ads/:id', adController.delete);
+router.delete('/ads/:id/restore', adController.restore);
 
 module.exports = router;

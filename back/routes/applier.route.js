@@ -8,5 +8,6 @@ router.get('/appliers/:id', applierController.findByPk);
 router.post('/appliers', applierController.create);
 router.put('/appliers/:id', applierController.update);
 router.delete('/appliers/:id', applierController.delete);
+router.delete('/appliers/:id/restore', applierController.restore);
 
 module.exports = router;

@@ -8,5 +8,6 @@ router.get('/clients/:id', clientController.findByPk);
 router.post('/clients', clientController.create);
 router.put('/clients/:id', clientController.update);
 router.delete('/clients/:id', clientController.delete);
+router.delete('/clients/:id/restore', clientController.restore);
 
 module.exports = router;
