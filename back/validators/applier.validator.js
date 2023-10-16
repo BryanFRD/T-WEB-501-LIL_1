@@ -19,7 +19,7 @@ class ApplierValidator extends BaseValidator {
     phonenumber: Joi.string(),
   }).required();
   
-  valideCreate = (data, options) => {
+  validateCreate = (data, options) => {
     return this.validate(this.#create, data, options);
   }
   
