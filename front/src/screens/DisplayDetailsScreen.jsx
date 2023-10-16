@@ -6,7 +6,7 @@ const TestData2 = {
     title: 'Full Stack Developer', 
     description: 'Le développeur full-stack est un profil très convoité par les entreprises. C’est un architecte des sites web. Il est amené à intervenir sur tous les aspects d’un projet informatique, dès la phase d’architecture logicielle. Il gère toutes les demandes informatiques de ses clients et est capable de concevoir un programme et d’en assurer sa maintenance. Ainsi, il travaille sur le back-office, pour régler la mise en page et les fonctionnalités de linterface administrateur du site. Puis, il développe les nouvelles fonctionnalités côté front-end, et participe au codage et aux tests. Le développeur web full-stack est polyvalent. Il doit être créatif et maîtriser la programmation et les langages informatiques comme Java, PHP, CSS, HTML, etc. Enfin, il doit faire preuve de polyvalence et de rigueur car il est souvent amené à travailler sur des tâches très diverses et de manière autonome. Découvrez le métier de développeur full stack, ses évolutions professionnelles et les formations Studi.', 
     status: 'OPEN',
-    contractTypes : 'CDI', 
+    contractTypes : 'CDI, CDD, Alternance, BeauGosse, Zizi, Sexe, dfètgfufsbns, fseuygfsvyufse, fsuygcfsg, caca', 
     createdAt : 'Il y a 7 jours', 
     wages: '40.000$/an',
     place: 'Lille',
