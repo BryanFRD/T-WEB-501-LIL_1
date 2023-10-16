@@ -5,6 +5,7 @@ const adminController = new AdminController();
 
 router.get('/admins', adminController.findAll);
 router.get('/admins/:id', adminController.findByPk);
+router.get('/admins/:id/userdata', adminController.findUserData)
 router.post('/admins', adminController.create);
 router.put('/admins/:id', adminController.update);
 router.delete('/admins/:id', adminController.delete);

@@ -48,7 +48,6 @@ const AdminScreen = () => {
     setLoading(true);
     Api.get(tab.url, {params: {offset: 0, limit: 10, deleted: true}})
       .then(({data}) => {
-        console.log('data:', data);
         setFetchTotal(data.total);
         setData(data.models);
         setFetchTotal(data.total);

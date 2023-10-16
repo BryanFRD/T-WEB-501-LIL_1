@@ -21,7 +21,7 @@ const AdminsCard = ({data, handleModalData}) => {
       return;
     }
     
-    Api.get(`/userdata/${data.associatedId}`)
+    Api.get(`/admins/${data.id}/userdata`, {params: {deleted: true}})
       .then((resp) => setDt(oldValue => ({...oldValue, userData: resp.data.model})))
       .catch(() => setDt(oldValue => ({...oldValue, userData: {email: 'Utilisateur introuvable !'}})));
   }, [data]);
@@ -32,25 +32,25 @@ const AdminsCard = ({data, handleModalData}) => {
         <div className='flex flex-wrap gap-4'>
           <div className='flex gap-2 flex-col md:flex-row'>
             <span>Nom:</span>
-            <span className=''>{dt.lastname}</span>
+            <span>{dt.lastname}</span>
           </div>
           <div className='flex gap-2 flex-col md:flex-row'>
             <span>Prénom:</span>
-            <span className=''>{dt.firstname}</span>
+            <span>{dt.firstname}</span>
           </div>
           <div className='flex gap-2 flex-col md:flex-row'>
             <span>Entreprise:</span>
-            <span className=''>{dt.name}</span>
+            <span>{dt.name}</span>
           </div>
           <div className='flex gap-2 flex-col md:flex-row'>
             <span>Email:</span>
-            <span className=''>{dt.userData?.email}</span>
+            <span>{dt.userData?.email}</span>
           </div>
         </div>
         <div className='flex gap-4 flex-col lg:flex-row text-slate-500 text-sm sm:text-base'>
           <div className='flex gap-2 flex-col md:flex-row'>
             <span>Créé le:</span>
-            <span className=''>{moment(dt.createdAt).format('DD/MM/YYYY')}</span>
+            <span>{moment(dt.createdAt).format('DD/MM/YYYY')}</span>
           </div>
           <div className='flex gap-2 flex-col md:flex-row'>
             <span>Mis à jour le:</span>

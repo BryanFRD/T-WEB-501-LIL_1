@@ -5,6 +5,8 @@ const adController = new AdController();
 
 router.get('/ads', adController.findAll);
 router.get('/ads/:id', adController.findByPk);
+router.get('/ads/:id/company', adController.findCompany);
+router.get('/ads/:id/contracttypes', adController.findContractTypes);
 router.post('/ads', adController.create);
 router.put('/ads/:id', adController.update);
 router.delete('/ads/:id', adController.delete);

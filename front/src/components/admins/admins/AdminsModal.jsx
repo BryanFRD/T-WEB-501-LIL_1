@@ -68,12 +68,11 @@ const AdminsModal = ({modalData, show, setShow, setDataList}) => {
             if(!data.model?.associatedId){
               modalData.updateData({...data.model, userData: {email: 'Utilisateur introuvable !'}});
             } else {
-              Api.get(`/userdata/${data.model?.associatedId}`)
+              Api.get(`/admins/${data.model?.id}/userdata`)
                 .then((resp) => modalData.updateData({...data.model, userData: resp.data.model, associatedId: resp.data.model.id}))
                 .catch(() => modalData.updateData({...data.model, userData: {email: 'Utilisateur introuvable !'}}));
             }
           }
-          
           
           setShow(false)
           toast.success('Admin mis à jour avec succès !');
@@ -87,7 +86,7 @@ const AdminsModal = ({modalData, show, setShow, setDataList}) => {
   }
   
   const loadOptions = (value) => {
-    return Api.get('/userdata', {params: {search: value, limit: 25}})
+    return Api.get('/userdata', {params: {search: value, limit: 25, deleted: true}})
       .then(({data}) => data.models.map(({id, email}) => ({value: id, label: email})))
       .catch(() => []);
   }
@@ -96,7 +95,7 @@ const AdminsModal = ({modalData, show, setShow, setDataList}) => {
     if(!id)
     return null;
   
-    await Api.get(`/userdata/${id}`)
+    await Api.get(`/admins/${id}/userdata`, {params: {deleted: true}})
       .then(({data}) => setData(oldValue => {
         return ({...oldValue, userData: {value: data.model.id, label: data.model.email}});
       }))
@@ -120,7 +119,7 @@ const AdminsModal = ({modalData, show, setShow, setDataList}) => {
       return modalData.data;
     });
     
-    loadUserData(modalData?.data?.associatedId);
+    loadUserData(modalData?.data?.id);
   }, [modalData]);
   
   return (

@@ -5,13 +5,16 @@ const Logger = require('../helpers/logger.helper.js');
 
 const authenticateToken = async (req, res, next) => {
   req.datas = {...(req.query ?? {}), ...(req.params ?? {}), ...(req.body ?? {})}
+  
   const method = req.method;
   const url = req.url.replace(/\/+$/, '').split('?')[0];
   const splittedUrl = url.split('/');
   if(splittedUrl.length > 2){
     const isUuid = splittedUrl[2].match(/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/);
-    if(isUuid)
+    if(isUuid){
+      req.datas.id = splittedUrl[2];
       splittedUrl[2] = ':id';
+    }
   }
   
   const routeName = `${method.toUpperCase()}${splittedUrl.join('/').toLowerCase()}`;
