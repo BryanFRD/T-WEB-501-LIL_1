@@ -7,6 +7,7 @@ const ClientsModal = ({modalData, show, setShow, setDataList}) => {
   const [data, setData] = useState({
     lastname: '',
     firstname: '',
+    phonenumber: '',
     userData: null,
     deletedAt: false
   });
@@ -91,7 +92,7 @@ const ClientsModal = ({modalData, show, setShow, setDataList}) => {
         if(!data.model)
           return ({...oldValue, userData: null});
         
-        return ({...oldValue, userData: data});
+        return ({...oldValue, userData: data.model});
       }))
       .catch(() => setData(oldValue => ({...oldValue, userData: null})));
   }
@@ -125,6 +126,9 @@ const ClientsModal = ({modalData, show, setShow, setDataList}) => {
         <div className='flex flex-col gap-2'>
           <label>Prénom:</label>
           <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.firstname} placeholder='Prénom' name='firstname' onChange={handleChange}/>
+        </div><div className='flex flex-col gap-2'>
+          <label>Numéro de téléphone:</label>
+          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.phonenumber} placeholder='0612345678' name='phonenumber' onChange={handleChange}/>
         </div>
         <div className='flex flex-col gap-2'>
           <label>Email:</label>

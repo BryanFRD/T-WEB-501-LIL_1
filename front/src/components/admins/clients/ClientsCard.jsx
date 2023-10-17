@@ -39,6 +39,10 @@ const ClientsCard = ({data, handleModalData}) => {
             <span>{dt.firstname}</span>
           </div>
           <div className='flex gap-2 flex-col md:flex-row'>
+            <span>Numéro de téléphone:</span>
+            <span>{dt.phonenumber}</span>
+          </div>
+          <div className='flex gap-2 flex-col md:flex-row'>
             <span>Email:</span>
             <span>{dt.userData?.email}</span>
           </div>
