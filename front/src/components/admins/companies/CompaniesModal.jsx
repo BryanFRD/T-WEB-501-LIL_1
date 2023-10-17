@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Api from '../../../api/Api';
 import toast from 'react-hot-toast';
 import Modal from '../../Modal';
+import AsyncSelect from 'react-select/async';
 
 const CompaniesModal = ({modalData, show, setShow, setDataList}) => {
   const [data, setData] = useState({
-    lastname: '',
-    firstname: '',
+    name: '',
     phonenumber: '',
+    description: '',
     userData: null,
     deletedAt: false
   });
@@ -25,6 +26,7 @@ const CompaniesModal = ({modalData, show, setShow, setDataList}) => {
     const formData = new FormData(e.currentTarget);
     const dataEntries = Object.fromEntries(formData);
     dataEntries.deletedAt = dataEntries.deletedAt ? new Date() : null;
+    dataEntries.associatedId = dataEntries.userData !== '' ? dataEntries.userData : null;
     
     if(modalData?.method === 'CREATE'){
       Api.post('/companies', dataEntries)
@@ -34,19 +36,19 @@ const CompaniesModal = ({modalData, show, setShow, setDataList}) => {
             setDataList(oldValue => [...oldValue, dataEntries]);
             
             if(dataEntries.deletedAt){
-              Api.delete(`/clients/${data.model.id}`)
+              Api.delete(`/companies/${data.model.id}`)
                 .then((res) => {})
                 .catch((err) => {});
             }
             
             setShow(false);
-            toast.success('Client mis à jour avec succès !');
+            toast.success('Admin mis à jour avec succès !');
             return;
           }
-          toast.error('Erreur lors de la mise à jour du client !');
+          toast.error('Erreur lors de la mise à jour de l\'admin !');
         })
         .catch(() => {
-          toast.error('Erreur lors de la mise à jour du client !');
+          toast.error('Erreur lors de la mise à jour de l\'admin !');
         });
         
       return;
@@ -66,7 +68,7 @@ const CompaniesModal = ({modalData, show, setShow, setDataList}) => {
             if(!data.model?.associatedId){
               modalData.updateData({...data.model, userData: {email: 'Utilisateur introuvable !'}});
             } else {
-              Api.get(`/companies/${data.model?.id}/userdata`)
+              Api.get(`/admins/${data.model?.id}/userdata`)
                 .then((resp) => modalData.updateData({...data.model, userData: resp.data.model, associatedId: resp.data.model.id}))
                 .catch(() => modalData.updateData({...data.model, userData: {email: 'Utilisateur introuvable !'}}));
             }
@@ -83,6 +85,12 @@ const CompaniesModal = ({modalData, show, setShow, setDataList}) => {
       });
   }
   
+  const loadOptions = (value) => {
+    return Api.get('/userdata', {params: {search: value, limit: 25, deleted: true}})
+      .then(({data}) => data.models.map(({id, email}) => ({value: id, label: email})))
+      .catch(() => []);
+  }
+  
   const loadUserData = async (id) => {
     if(!id)
       return null;
@@ -92,7 +100,7 @@ const CompaniesModal = ({modalData, show, setShow, setDataList}) => {
         if(!data.model)
           return ({...oldValue, userData: null});
         
-        return ({...oldValue, userData: data.model});
+        return ({...oldValue, userData: {value: data.model.id, label: data.model.email}});
       }))
       .catch(() => setData(oldValue => ({...oldValue, userData: null})));
   }
@@ -101,8 +109,9 @@ const CompaniesModal = ({modalData, show, setShow, setDataList}) => {
     setData(() => {
       if(modalData?.method === 'CREATE'){
         return {
-          lastname: '',
-          firstname: '',
+          name: '',
+          phonenumber: '',
+          description: '',
           userData: null,
           deletedAt: false
         };
@@ -126,13 +135,14 @@ const CompaniesModal = ({modalData, show, setShow, setDataList}) => {
         <div className='flex flex-col gap-2'>
           <label>Prénom:</label>
           <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.firstname} placeholder='Prénom' name='firstname' onChange={handleChange}/>
-        </div><div className='flex flex-col gap-2'>
-          <label>Numéro de téléphone:</label>
-          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.phonenumber} placeholder='0612345678' name='phonenumber' onChange={handleChange}/>
         </div>
         <div className='flex flex-col gap-2'>
-          <label>Email:</label>
-          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.userData?.email} placeholder='Email' name='email' onChange={handleChange}/>
+          <label>Téléphone:</label>
+          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.phonenumber} placeholder='0712345678' name='phonenumber' onChange={handleChange}/>
+        </div>
+        <div className='flex flex-col gap-2'>
+          <label>Utilisateur:</label>
+          <AsyncSelect placeholder='Utilisateur' defaultOptions isClearable loadOptions={loadOptions} value={data.userData} name='userData' onChange={handleChange} />
         </div>
         <div className='flex items-center gap-2'>
           <label>Supprimé:</label>

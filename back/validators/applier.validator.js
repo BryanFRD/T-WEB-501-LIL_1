@@ -3,6 +3,11 @@ const BaseValidator = require('./base.validator');
 
 class ApplierValidator extends BaseValidator {
   
+  #findAd = Joi.object({
+    id: Joi.string().uuid().required(),
+    deleted: Joi.boolean().default(false),
+  }).required();
+  
   #create = Joi.object({
     firstname: Joi.string().required(),
     lastname: Joi.string().required(),
@@ -19,6 +24,10 @@ class ApplierValidator extends BaseValidator {
     phonenumber: Joi.string(),
     deleted: Joi.boolean().default(false),
   }).required();
+  
+  validateFindAd = (data, options) => {
+    return this.validate(this.#findAd, data, options);
+  }
   
   validateCreate = (data, options) => {
     return this.validate(this.#create, data, options);

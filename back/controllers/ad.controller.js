@@ -42,6 +42,45 @@ class AdController extends BaseController {
       .catch((err) => res.status(400).json({success: false, message: err.message}))
   }
   
+  create(req, res) {
+    const response = this.validator.validateCreate(req.datas);
+    const data = response?.value;
+    
+    if(!data){
+      return res.status(400).json({success: false, message: response.error});
+    }
+    
+    this.model.create(data)
+      .then((model) => {
+        if(!model){
+          return res.status(404).json({
+            status: false,
+            message: 'Model Not Found',
+          });
+        }
+        
+        sequelize.models.ContractType.findAll({
+          where: {
+            id: data.contractTypes,
+          },
+          paranoid: false,
+        })
+          .then((models) => {
+            if(!models){
+              return res.status(404).json({
+                status: false,
+                message: 'Contract Types Not Found',
+              });
+            }
+            
+            model.setContractTypes(models);
+            
+            return res.status(200).json({success: true, model});
+          });
+      })
+      .catch((err) => res.status(400).json({success: false, message: err.message}));
+  }
+  
   update(req, res) {
     const response = this.validator.validateUpdate(req.datas);
     const data = response?.value;

@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Appliers extends Model {
     static associate(models) {
-      
+      Appliers.belongsTo(models.Ad, { foreignKey: 'adId', as: 'ad'});
     }
   }
   Appliers.init({
@@ -31,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     description: {
       type: DataTypes.STRING
+    },
+    adId: {
+      type: DataTypes.UUID,
+      allowNull: false
     }
   }, {
     sequelize,

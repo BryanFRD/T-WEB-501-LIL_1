@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Api from '../../../api/Api';
 import toast from 'react-hot-toast';
 import Modal from '../../Modal';
+import AsyncSelect from 'react-select/async';
 
 const ClientsModal = ({modalData, show, setShow, setDataList}) => {
   const [data, setData] = useState({
     lastname: '',
     firstname: '',
-    phonenumber: '',
+    name: '',
     userData: null,
     deletedAt: false
   });
@@ -25,6 +26,7 @@ const ClientsModal = ({modalData, show, setShow, setDataList}) => {
     const formData = new FormData(e.currentTarget);
     const dataEntries = Object.fromEntries(formData);
     dataEntries.deletedAt = dataEntries.deletedAt ? new Date() : null;
+    dataEntries.associatedId = dataEntries.userData !== '' ? dataEntries.userData : null;
     
     if(modalData?.method === 'CREATE'){
       Api.post('/clients', dataEntries)
@@ -34,7 +36,7 @@ const ClientsModal = ({modalData, show, setShow, setDataList}) => {
             setDataList(oldValue => [...oldValue, dataEntries]);
             
             if(dataEntries.deletedAt){
-              Api.delete(`/clients/${data.model.id}`)
+              Api.delete(`/admins/${data.model.id}`)
                 .then((res) => {})
                 .catch((err) => {});
             }
@@ -73,14 +75,20 @@ const ClientsModal = ({modalData, show, setShow, setDataList}) => {
           }
           
           setShow(false)
-          toast.success('Client mis à jour avec succès !');
+          toast.success('Admin mis à jour avec succès !');
           return;
         }
-        toast.error('Erreur lors de la mise à jour du client !');
+        toast.error('Erreur lors de la mise à jour de l\'admin !');
       })
       .catch(() => {
-        toast.error('Erreur lors de la mise à jour du client !');
+        toast.error('Erreur lors de la mise à jour de l\'admin !');
       });
+  }
+  
+  const loadOptions = (value) => {
+    return Api.get('/userdata', {params: {search: value, limit: 25, deleted: true}})
+      .then(({data}) => data.models.map(({id, email}) => ({value: id, label: email})))
+      .catch(() => []);
   }
   
   const loadUserData = async (id) => {
@@ -92,7 +100,7 @@ const ClientsModal = ({modalData, show, setShow, setDataList}) => {
         if(!data.model)
           return ({...oldValue, userData: null});
         
-        return ({...oldValue, userData: data.model});
+        return ({...oldValue, userData: {value: data.model.id, label: data.model.email}});
       }))
       .catch(() => setData(oldValue => ({...oldValue, userData: null})));
   }
@@ -103,6 +111,7 @@ const ClientsModal = ({modalData, show, setShow, setDataList}) => {
         return {
           lastname: '',
           firstname: '',
+          name: '',
           userData: null,
           deletedAt: false
         };
@@ -126,13 +135,14 @@ const ClientsModal = ({modalData, show, setShow, setDataList}) => {
         <div className='flex flex-col gap-2'>
           <label>Prénom:</label>
           <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.firstname} placeholder='Prénom' name='firstname' onChange={handleChange}/>
-        </div><div className='flex flex-col gap-2'>
-          <label>Numéro de téléphone:</label>
-          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.phonenumber} placeholder='0612345678' name='phonenumber' onChange={handleChange}/>
         </div>
         <div className='flex flex-col gap-2'>
-          <label>Email:</label>
-          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.userData?.email} placeholder='Email' name='email' onChange={handleChange}/>
+          <label>Téléphone:</label>
+          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.phonenumber} placeholder='0712345678' name='phonenumber' onChange={handleChange}/>
+        </div>
+        <div className='flex flex-col gap-2'>
+          <label>Utilisateur:</label>
+          <AsyncSelect placeholder='Utilisateur' defaultOptions isClearable loadOptions={loadOptions} value={data.userData} name='userData' onChange={handleChange} />
         </div>
         <div className='flex items-center gap-2'>
           <label>Supprimé:</label>
