@@ -17,17 +17,33 @@ const AdsCards = ({data, handleModalData}) => {
   
   useEffect(() => {
     if(!data?.companyId){
-      setDt(oldValue => ({...oldValue, userData: {email: 'Entreprise introuvable !'}}));
-      return;
+      setDt(oldValue => ({...oldValue, company: {email: 'Entreprise introuvable !'}}));
     }
     
-    Api.get(`/companies/${data.companyId}`, {params: {deleted: true}})
-      .then((resp) => setDt(oldValue => ({...oldValue, company: resp.data.model})))
-      .catch(() => setDt(oldValue => ({...oldValue, company: {name: 'Entreprise introuvable !'}})));
+    if(!data?.contractTypes?.length == 0){
+      setDt(oldValue => ({...oldValue, contract: 'Aucun type de contrat !'}));
+    }
+    
+    if(data?.companyId){
+      Api.get(`/ads/${data.id}/company`, {params: {deleted: true}})
+        .then((resp) => setDt(oldValue => ({...oldValue, company: resp.data.model})))
+        .catch(() => setDt(oldValue => ({...oldValue, company: {name: 'Entreprise introuvable !'}})));
+    }
+    
+    if(!data?.contractTypes?.length > 0){
+      Api.get(`/ads/${data.id}/contracttypes`, {params: {deleted: true}})
+        .then((resp) => setDt(oldValue => {
+          if(!resp.data?.models?.length)
+            return ({...oldValue, contract: 'Aucun type de contrat !'});
+          
+          return ({...oldValue, contract: resp.data.models.reduce((acc, {name}) => `${acc} ${name}`, '')});
+        }))
+        .catch(() => setDt(oldValue => ({...oldValue, contract: 'Aucun type de contrat !'})));
+    }
   }, [data]);
   
   return (
-    <div className='flex flex-col md:flex-row p-4 w-full justify-between bg-slate-100 rounded'>
+    <div className='flex flex-col md:flex-row p-4 w-full justify-between bg-slate-100 rounded gap-4'>
       <div className='flex flex-col justify-between gap-4'>
         <div className='flex flex-wrap gap-4'>
           <div className='flex gap-2 flex-col md:flex-row'>

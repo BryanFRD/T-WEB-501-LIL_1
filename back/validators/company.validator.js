@@ -15,6 +15,7 @@ class CompanyValidator extends BaseValidator {
     description: Joi.string(),
     phonenumber: Joi.string(),
     associatedId: Joi.string().uuid(),
+    deleted: Joi.boolean().default(false),
   }).required();
   
   validateCreate = (data, options) => {

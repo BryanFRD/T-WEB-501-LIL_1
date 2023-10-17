@@ -17,6 +17,7 @@ class ApplierValidator extends BaseValidator {
     lastname: Joi.string(),
     email: Joi.string().email(),
     phonenumber: Joi.string(),
+    deleted: Joi.boolean().default(false),
   }).required();
   
   valideCreate = (data, options) => {

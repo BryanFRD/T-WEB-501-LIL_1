@@ -6,19 +6,27 @@ import toast from 'react-hot-toast';
 
 const AdsModal = ({modalData, show, setShow, setDataList}) => {
   const [data, setData] = useState({
-    lastname: '',
-    firstname: '',
-    name: '',
-    userData: null,
+    title: '',
+    description: '',
+    wages: '',
+    place: '',
+    workingTime: '',
+    status: 'Ouvert',
+    company: null,
+    contractTypes: [],
     deletedAt: false
   });
   
   const handleChange = (e) => {
-    if(!e || !e.target){
-      setData(oldValue => ({...oldValue, userData: e}));
-      return;
-    }
     setData(oldValue => ({...oldValue, [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value}));
+  }
+  
+  const handleCompanyChange = (e) => {
+    setData(oldValue => ({...oldValue, company: e}));
+  }
+  
+  const handleContractTypesChange = (e) => {
+    setData(oldValue => ({...oldValue, contractTypes: e}));
   }
   
   const handleSubmit = (e) => {
@@ -26,7 +34,8 @@ const AdsModal = ({modalData, show, setShow, setDataList}) => {
     const formData = new FormData(e.currentTarget);
     const dataEntries = Object.fromEntries(formData);
     dataEntries.deletedAt = dataEntries.deletedAt ? new Date() : null;
-    dataEntries.companyId = dataEntries.company !== '' ? dataEntries.contractTypesId : null;
+    dataEntries.companyId = dataEntries.company !== '' ? dataEntries.company : null;
+    dataEntries.contractTypes = data.contractTypes?.map(({value}) => value) ?? [];
     
     if(modalData?.method === 'CREATE'){
       Api.post('/ads', dataEntries)
@@ -37,8 +46,8 @@ const AdsModal = ({modalData, show, setShow, setDataList}) => {
             
             if(dataEntries.deletedAt){
               Api.delete(`/ads/${data.model.id}`)
-                .then((res) => {})
-                .catch((err) => {});
+                .then(() => {})
+                .catch(() => {});
             }
             
             setShow(false);
@@ -61,19 +70,22 @@ const AdsModal = ({modalData, show, setShow, setDataList}) => {
     }
     
     Api.put(`/ads/${modalData.data.id}`, dataEntries, {params: {deleted: true}})
-      .then(({data}) => {
+      .then(async ({data}) => {
         if(data.success){
           if(modalData?.updateData){
-            modalData.updateData(data.model);
-            if(!data.model?.associatedId){
-              modalData.updateData({...data.model, userData: {email: 'Utilisateur introuvable !'}});
-            } else {
-              Api.get(`/userdata/${data.model?.associatedId}`)
-                .then((resp) => modalData.updateData({...data.model, userData: resp.data.model, associatedId: resp.data.model.id}))
-                .catch(() => modalData.updateData({...data.model, userData: {email: 'Utilisateur introuvable !'}}));
-            }
+            await Api.get(`/ads/${data.model.id}/company`, {params: {deleted: true}})
+              .then((resp) => {
+                return modalData.updateData({...data.model, company: resp.data.model?.name})
+              })
+              .catch(() => {
+                return modalData.updateData({...data.model, company: {name: 'Entreprise introuvable !'}})
+              });
+            
+            await Api.get(`/ads/${data.model.id}/contracttypes`, {params: {deleted: true}})
+              .then((resp) => modalData.updateData({...data.model, contractTypes: resp.data.models.reduce((acc, {name}) => `${acc}, ${name}`, '')}))
+              .catch(() => modalData.updateData({...data.model, contractTypes: 'Aucun type de contrat !'}));
+              console.log(data.model)
           }
-          
           
           setShow(false)
           toast.success('Admin mis à jour avec succès !');
@@ -86,61 +98,106 @@ const AdsModal = ({modalData, show, setShow, setDataList}) => {
       });
   }
   
-  const loadOptions = (value) => {
-    return Api.get('/userdata', {params: {search: value, limit: 25}})
-      .then(({data}) => data.models.map(({id, email}) => ({value: id, label: email})))
+  const loadCompaniesOptions = (value) => {
+    return Api.get('/companies', {params: {search: value, limit: 25}})
+      .then(({data}) => {
+        return data.models.map(({id, name}) => ({value: id, label: name}))
+      })
+      .catch(() => []);
+  }
+  
+  const loadContractTypesOptions = (value) => {
+    return Api.get('/contracttypes', {params: {search: value, limit: 25}})
+      .then(({data}) => data.models.map(({id, name}) => ({value: id, label: name})))
       .catch(() => []);
   }
   
   const loadCompany = async (id) => {
     if(!id)
-    return null;
+      return null;
   
-    await Api.get(`/companies/${id}`, {params: {deleted: true}})
+    await Api.get(`/ads/${id}/company`, {params: {deleted: true}})
       .then(({data}) => setData(oldValue => {
-        return ({...oldValue, userData: {value: data.model.id, label: data.model.email}});
+        if(!data.model){
+          return ({...oldValue, company: null});
+        }
+        
+        return ({...oldValue, company: {value: data.model.id, label: data.model.name,}});
       }))
-      .catch(() => setData(oldValue => ({...oldValue, userData: null})));
+      .catch(() => setData(oldValue => ({...oldValue, company: null})));
+  }
+  
+  const loadContractType = async (id) => {
+    if(!id)
+      return null;
+    
+    await Api.get(`/ads/${id}/contracttypes`, {params: {deleted: true}})
+      .then(({data}) => setData(oldValue => {
+        return ({...oldValue, contractTypes: data?.models?.map(({id, name}) => ({value: id, label: name})) ?? []});
+      }))
+      .catch(() => setData(oldValue => ({...oldValue, contractTypes: []})));
   }
   
   useEffect(() => {
     setData(() => {
       if(modalData?.method === 'CREATE'){
         return {
-          lastname: '',
-          firstname: '',
-          name: '',
-          userData: null,
-          deletedAt: false
+          title: '',
+          description: '',
+          wages: '',
+          place: '',
+          workingTime: '',
+          status: 'Ouvert',
+          company: null,
+          contractTypes: [],
         };
       }
       
       modalData.data.company = null;
+      modalData.data.contractTypes = null;
       modalData.data.deletedAt = Boolean(modalData.data.deletedAt);
       return modalData.data;
     });
     
-    loadCompany(modalData?.data?.companyId);
+    loadCompany(modalData?.data?.id);
+    loadContractType(modalData?.data?.id);
   }, [modalData]);
   
   return (
-    <Modal show={show} title={'admin'} setShow={setShow}>
+    <Modal show={show} title={'Annonces'} setShow={setShow}>
       <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-2'>
-          <label>Nom:</label>
-          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.lastname} placeholder='Nom' name='lastname' onChange={handleChange}/>
+          <label>Titre:</label>
+          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.title} placeholder='Nom' name='title' onChange={handleChange}/>
         </div>
         <div className='flex flex-col gap-2'>
-          <label>Prénom:</label>
-          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.firstname} placeholder='Prénom' name='firstname' onChange={handleChange}/>
+          <label>Description:</label>
+          <textarea type="text" className='resize-none border-b-2 border-primary rounded bg-slate-200 py-1 px-2' rows={3} value={data.description} placeholder='Description' name='description' onChange={handleChange}>
+          </textarea>
+        </div>
+        <div className='flex flex-col gap-2'>
+          <label>Salaire:</label>
+          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.wages} placeholder='Salaire' name='wages' onChange={handleChange}/>
+        </div>
+        <div className='flex flex-col gap-2'>
+          <label>Lieu:</label>
+          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.place} placeholder='Lieu' name='place' onChange={handleChange}/>
+        </div>
+        <div className='flex flex-col gap-2'>
+          <label>Heure de travail:</label>
+          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.workingTime} placeholder='Heure de travail' name='workingTime' onChange={handleChange}/>
+        </div>
+        <div className='flex flex-col gap-2'>
+          <label>Status:</label>
+          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.status} placeholder='Status' name='status' onChange={handleChange}/>
         </div>
         <div className='flex flex-col gap-2'>
           <label>Entreprise:</label>
-          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.name} placeholder='Entreprise' name='name' onChange={handleChange}/>
+          <AsyncSelect placeholder='Entreprise' defaultOptions isClearable loadOptions={loadCompaniesOptions} value={data.company} name='company' onChange={handleCompanyChange} />
         </div>
         <div className='flex flex-col gap-2'>
-          <label>Utilisateur:</label>
-          <AsyncSelect placeholder='Utilisateur' defaultOptions isClearable loadOptions={loadOptions} value={data.userData} name='userData' onChange={handleChange} />
+          <label>Types de contrat:</label>
+          <AsyncSelect placeholder='Types de contrat' defaultOptions isClearable loadOptions={loadContractTypesOptions} value={data.contractTypes} name='contractTypes' onChange={handleContractTypesChange} isMulti/>
         </div>
         <div className='flex items-center gap-2'>
           <label>Supprimé:</label>

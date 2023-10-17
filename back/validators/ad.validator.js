@@ -3,11 +3,21 @@ const BaseValidator = require('./base.validator');
 
 class AdValidator extends BaseValidator {
   
+  #findCompany = Joi.object({
+    id: Joi.string().uuid().required(),
+    deleted: Joi.boolean().default(false)
+  }).required();
+  
+  #findContractTypes = Joi.object({
+    id: Joi.string().uuid().required(),
+    deleted: Joi.boolean().default(false)
+  }).required();
+  
   #create = Joi.object({
     title: Joi.string().required(),
     description: Joi.string().required(),
-    status: Joi.string().default('active'),
-    contractType: Joi.array().items(Joi.string()).required(),
+    status: Joi.string().default('OPEN'),
+    contractTypes: Joi.array().items(Joi.string().uuid()).required(),
     companyId: Joi.string().uuid().required(),
     wages: Joi.string().required(),
     place: Joi.string().required(),
@@ -18,11 +28,21 @@ class AdValidator extends BaseValidator {
     title: Joi.string(),
     description: Joi.string(),
     status: Joi.string(),
-    contactType: Joi.array().items(Joi.string()),
+    contractTypes: Joi.array(),
+    companyId: Joi.string().uuid(),
     wages: Joi.string(),
     place: Joi.string(),
-    workingTime: Joi.string()
+    workingTime: Joi.string(),
+    deleted: Joi.boolean().default(false),
   }).required();
+  
+  validateFindCompany = (data, options) => {
+    return this.validate(this.#findCompany, data, options);
+  }
+  
+  validateFindContractTypes = (data, options) => {
+    return this.validate(this.#findContractTypes, data, options);
+  }
   
   validateCreate = (data, options) => {
     return this.validate(this.#create, data, options);
