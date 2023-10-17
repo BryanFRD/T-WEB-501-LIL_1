@@ -4,7 +4,7 @@ const ApplierValidator = require('../validators/applier.validator');
 class ApplierController extends BaseController {
   
   constructor(){
-    super('Applier', new ApplierValidator());
+    super('Appliers', new ApplierValidator());
   }
   
 }
