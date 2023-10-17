@@ -5,6 +5,7 @@ const clientController = new ClientController();
 
 router.get('/clients', clientController.findAll);
 router.get('/clients/:id', clientController.findByPk);
+router.get('/clients/:id/userdata', clientController.findUserData);
 router.post('/clients', clientController.create);
 router.put('/clients/:id', clientController.update);
 router.delete('/clients/:id', clientController.delete);
