@@ -34,6 +34,10 @@ class ClientValidator extends BaseValidator {
     return this.validate(this.#update, data, options);
   }
   
+  validateFindUserData = (data, options) => {
+    return this.validate(this.#findUserData, data, options);
+  }
+  
 }
 
 module.exports = ClientValidator;
