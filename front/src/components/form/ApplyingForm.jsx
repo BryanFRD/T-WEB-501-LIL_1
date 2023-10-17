@@ -19,14 +19,24 @@ const ApplyingForm = ({adId}) => {
     }); 
 
     useEffect(() => {
+
         if (user) {
-            setFormData({
-                lastname: user.lastname,
-                firstname: user.firstname,
-                email: user.email,
-                phonenumber: user.phonenumber,
-                adId: adId,  
-            }); 
+            Api.get(`/clients/${user.id}/userdata`)
+                .then((response) => {
+                    const userData = response.data; 
+                    setFormData({
+                        lastname: user.lastname,
+                        firstname: user.firstname,
+                        email: userData.email,
+                        phonenumber: user.phonenumber,
+                        adId: adId,  
+                }); 
+
+            })
+
+            .catch((error) => {
+                console.error('Erreur lors de la récupération des données utilisateur', error); 
+            });
         }
     }, [user, adId]); 
 
