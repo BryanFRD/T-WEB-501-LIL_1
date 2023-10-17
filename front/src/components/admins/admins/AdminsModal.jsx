@@ -8,6 +8,7 @@ const AdminsModal = ({modalData, show, setShow, setDataList}) => {
   const [data, setData] = useState({
     lastname: '',
     firstname: '',
+    name: '',
     userData: null,
     deletedAt: false
   });
@@ -67,7 +68,7 @@ const AdminsModal = ({modalData, show, setShow, setDataList}) => {
             if(!data.model?.associatedId){
               modalData.updateData({...data.model, userData: {email: 'Utilisateur introuvable !'}});
             } else {
-              Api.get(`/clients/${data.model?.id}/userdata`)
+              Api.get(`/admins/${data.model?.id}/userdata`)
                 .then((resp) => modalData.updateData({...data.model, userData: resp.data.model, associatedId: resp.data.model.id}))
                 .catch(() => modalData.updateData({...data.model, userData: {email: 'Utilisateur introuvable !'}}));
             }
@@ -84,16 +85,22 @@ const AdminsModal = ({modalData, show, setShow, setDataList}) => {
       });
   }
   
+  const loadOptions = (value) => {
+    return Api.get('/userdata', {params: {search: value, limit: 25, deleted: true}})
+      .then(({data}) => data.models.map(({id, email}) => ({value: id, label: email})))
+      .catch(() => []);
+  }
+  
   const loadUserData = async (id) => {
     if(!id)
       return null;
-    
-    await Api.get(`/clients/${id}/userdata`, {params: {deleted: true}})
+  
+    await Api.get(`/admins/${id}/userdata`, {params: {deleted: true}})
       .then(({data}) => setData(oldValue => {
         if(!data.model)
           return ({...oldValue, userData: null});
         
-        return ({...oldValue, userData: data.model});
+        return ({...oldValue, userData: {value: data.model.id, label: data.model.email}});
       }))
       .catch(() => setData(oldValue => ({...oldValue, userData: null})));
   }
@@ -104,6 +111,7 @@ const AdminsModal = ({modalData, show, setShow, setDataList}) => {
         return {
           lastname: '',
           firstname: '',
+          name: '',
           userData: null,
           deletedAt: false
         };
