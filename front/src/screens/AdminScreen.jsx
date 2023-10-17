@@ -25,7 +25,7 @@ const AdminScreen = () => {
     appliers: {title: 'Candidatures', card: AppliersCard, modal: AppliersModal, url: '/appliers/'},
     clients: {title: 'Clients', card: ClientsCard, modal: ClientsModal, url: '/clients/'},
     companies: {title: 'Entreprises', card: CompaniesCard, modal: CompaniesModal, url: '/companies/'},
-    userdatas: {title: 'Utilisateurs', card: UserDatasCard, modal: UserDatasModal, url: '/userdatas/'}
+    userdatas: {title: 'Utilisateurs', card: UserDatasCard, modal: UserDatasModal, url: '/userdata/'}
   }
   
   const [tab, setTab] = useState(tabs.ads);

@@ -62,7 +62,7 @@ class AuthController {
         if(!userData.validated){
           return res.status(400).json({success: false, message: 'Email not validated'});
         }
-        
+        console.log(userData.authenticate(data.password))
         if(!userData.authenticate(data.password)){
           return res.status(400).json({success: false, message: 'Wrong password'});
         }

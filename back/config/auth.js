@@ -7,6 +7,7 @@ const config = {
     'GET/userdata': ({user}) => user.isAdmin,
     'GET/userdata/:id': ({user}) => user.isAdmin,
     'GET/auth/isadmin': ({user}) => user.isAdmin,
+    'PUT/userdata/:id': ({user, datas}) => user.isAdmin,
   }
 }
 

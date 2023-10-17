@@ -4,8 +4,8 @@ const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
   class UserData extends Model {
-    async authenticate(password) {
-      return await bcrypt.compare(password, process.env.PASSWORD_PREFIX + this.password);
+    authenticate(password) {
+      return bcrypt.compareSync(password, this.getDataValue('password'));
     }
     static associate(models) {
     }
@@ -28,7 +28,8 @@ module.exports = (sequelize, DataTypes) => {
         return "password";
       },
       set(value) {
-        this.setDataValue('password', bcrypt.hashSync(value, 10).replace(process.env.PASSWORD_PREFIX, ''));
+        console.log('password:', value)
+        this.setDataValue('password', bcrypt.hashSync(value, 10));
       }
     },
     validated: {
