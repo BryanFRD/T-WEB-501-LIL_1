@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import Api from '../../api/Api';
 
 const ApplyingForm = ({adId}) => {
+
+    const {user} = useContext(UserContext); 
+
+    console.log(user)
 
     const [formData, setFormData] = useState({
         lastname: '', 
@@ -12,6 +17,18 @@ const ApplyingForm = ({adId}) => {
         phonenumber: '' ,
         adId: adId, 
     }); 
+
+    useEffect(() => {
+        if (user) {
+            setFormData({
+                lastname: user.lastname,
+                firstname: user.firstname,
+                email: user.email,
+                phonenumber: user.phonenumber,
+                adId: adId,  
+            }); 
+        }
+    }, [user, adId]); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -58,6 +75,7 @@ const ApplyingForm = ({adId}) => {
                         overflow-auto basis-4/5'
                     type="text" name='lastname' id='lastname'
                     onChange={handleInputChange}
+                    value={formData.lastname}
                      />
 
                 </div>
@@ -71,6 +89,7 @@ const ApplyingForm = ({adId}) => {
                         overflow-auto basis-4/5'
                     type="text" name='firstname' id='firstname'
                     onChange={handleInputChange}
+                    value={formData.firstname}
                     />
 
                 </div>
@@ -84,6 +103,7 @@ const ApplyingForm = ({adId}) => {
                     overflow-auto basis-4/5'
                     type="email" name='email' id='email'
                     onChange={handleInputChange} 
+                    value={formData.email}
                     />
 
                 </div>
@@ -95,8 +115,9 @@ const ApplyingForm = ({adId}) => {
 
                     <input required className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
                         overflow-auto basis-4/5'
-                    type='tel' id='phoneNumber'
+                    type='tel' id='phonenumber'
                     onChange={handleInputChange}
+                    value={formData.phonenumber}
                     />
 
                 </div>

@@ -8,8 +8,13 @@ import PlusIcon from'./PlusIcon';
 
 const SearchBar = () => {
 
+    const [searchData, setSearchData] = useState({
+        searchedjob : '', 
+        jobplace : '', 
+    }); 
 
     return (
+
         <div className='grid grid-flow-cols items-center gap-3
         md:flex md:flex-row'>
 
