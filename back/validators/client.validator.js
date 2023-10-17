@@ -3,6 +3,11 @@ const BaseValidator = require('./base.validator');
 
 class ClientValidator extends BaseValidator {
   
+  #findUserData = Joi.object({
+    id: Joi.string().uuid().required(),
+    deleted: Joi.boolean().default(false)
+  });
+  
   #create = Joi.object({
     firstname: Joi.string().required(),
     lastname: Joi.string().required(),
