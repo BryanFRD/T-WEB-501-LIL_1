@@ -15,12 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV4,
     },
     adId: {
-      type: DataTypes.UUID,
-      allowNull: false
+      type: DataTypes.UUID
     },
     contractTypeId: {
-      type: DataTypes.UUID,
-      allowNull: false
+      type: DataTypes.UUID
     }
   }, {
     sequelize,

@@ -12,6 +12,7 @@ class UserDataValidator extends BaseValidator {
     id: Joi.string().uuid().required(),
     email: Joi.string().email(),
     password: Joi.string(),
+    deleted: Joi.boolean().default(false),
   }).required();
   
   validateCreate = (data, options) => {

@@ -93,10 +93,13 @@ const AdminsModal = ({modalData, show, setShow, setDataList}) => {
   
   const loadUserData = async (id) => {
     if(!id)
-    return null;
+      return null;
   
     await Api.get(`/admins/${id}/userdata`, {params: {deleted: true}})
       .then(({data}) => setData(oldValue => {
+        if(!data.model)
+          return ({...oldValue, userData: null});
+        
         return ({...oldValue, userData: {value: data.model.id, label: data.model.email}});
       }))
       .catch(() => setData(oldValue => ({...oldValue, userData: null})));

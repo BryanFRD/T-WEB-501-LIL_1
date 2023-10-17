@@ -10,7 +10,16 @@ class ContractTypeValidator extends BaseValidator {
   #update = Joi.object({
     id: Joi.string().uuid().required(),
     name: Joi.string(),
+    deleted: Joi.boolean().default(false),
   }).required();
+  
+  validateCreate = (data, options) => {
+    return this.validate(this.#create, data, options);
+  }
+  
+  validateUpdate = (data, options) => {
+    return this.validate(this.#update, data, options);
+  }
   
 }
 

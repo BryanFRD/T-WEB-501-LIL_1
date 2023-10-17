@@ -27,7 +27,7 @@ const AdminsCard = ({data, handleModalData}) => {
   }, [data]);
   
   return (
-    <div className='flex flex-col md:flex-row p-4 w-full justify-between bg-slate-100 rounded'>
+    <div className='flex flex-col md:flex-row p-4 w-full justify-between bg-slate-100 rounded gap-4'>
       <div className='flex flex-col justify-between gap-4'>
         <div className='flex flex-wrap gap-4'>
           <div className='flex gap-2 flex-col md:flex-row'>
