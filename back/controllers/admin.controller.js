@@ -1,5 +1,6 @@
 const BaseController = require('./base.controller');
 const AdminValidator = require('../validators/admin.validator');
+const { Op } = require('sequelize');
 
 class AdminController extends BaseController {
   
@@ -16,6 +17,9 @@ class AdminController extends BaseController {
     }
     
     this.model.findAndCountAll({
+      where: {
+        name: {[Op.like]: `%${data?.search ?? ''}%`},
+      },
       paranoid: !data.deleted,
     })
       .then((data) => res.status(200).json({success: true, models: data.rows, total: data.count}))
