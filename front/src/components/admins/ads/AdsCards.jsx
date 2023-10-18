@@ -52,7 +52,7 @@ const AdsCards = ({data, handleModalData}) => {
           </div>
           <div className='flex gap-2 flex-col md:flex-row'>
             <span>Description:</span>
-            <span>{dt.firstname}</span>
+            <span>{dt.description}</span>
           </div>
           <div className='flex gap-2 flex-col md:flex-row'>
             <span>Salaire:</span>

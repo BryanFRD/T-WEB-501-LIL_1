@@ -130,11 +130,11 @@ const CompaniesModal = ({modalData, show, setShow, setDataList}) => {
       <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-2'>
           <label>Nom:</label>
-          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.lastname} placeholder='Nom' name='lastname' onChange={handleChange}/>
+          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.name} placeholder='Nom' name='name' onChange={handleChange}/>
         </div>
         <div className='flex flex-col gap-2'>
-          <label>Prénom:</label>
-          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.firstname} placeholder='Prénom' name='firstname' onChange={handleChange}/>
+          <label>Description:</label>
+          <textarea type="text" className='resize-none border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.description} placeholder='Décrivez votre entreprise' name='description' onChange={handleChange}/>
         </div>
         <div className='flex flex-col gap-2'>
           <label>Téléphone:</label>

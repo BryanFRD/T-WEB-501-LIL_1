@@ -16,6 +16,8 @@ const TestData2 = {
     workingTime: '40h/semaine',
 }; 
 
+
+
 const DisplayDetailsScreen = () => {
 
     const {id} = useParams(); 
@@ -31,7 +33,38 @@ const DisplayDetailsScreen = () => {
         setShowModal(false); 
     }
 
+    const [AdDatas, setAdDatas] = useState([])
+
+    const loadAdData = () => {
+
+        return Api.get('/ads')
+
+            .then((response) => {
+                const AdData = response.data.models.map((data) => ({
+                    id: data.id, 
+                    title: data.title,
+                    description: data.description, 
+                    status: data.status,
+                    contractTypes: data.contractTypes, 
+                    createdAt: data.createdAt, 
+                    wages: data.wages, 
+                    place: data.place, 
+                    workingTime: data.workingTime,
+                })); 
+                setAdDatas(AdData);
+                
+                return AdData; 
+                
+            })
+
+            
+    }
+
+    console.log(AdDatas)
+
     return (
+
+        
 
         <div className='shadow appearance-none border rounded text-dark leading-tight focus:outline-none focus:shadow-outline
         w-11/12 flex flex-col ml-auto mr-auto mt-6'>
