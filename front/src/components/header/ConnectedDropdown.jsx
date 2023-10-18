@@ -23,7 +23,7 @@ const ConnectedDropdown = () => {
       <div className={`z-10 mt-4 right-2 ${collapse && 'hidden'} absolute font-normal bg-slate-50 divide-y divide-gray-100 rounded-lg shadow w-44 dark:divide-gray-600`}>
           <ul className="py-2 text-sm text-dark" aria-labelledby="dropdownLargeButton">
             <li>
-              <Link to='/' className="block px-4 py-2 hover:bg-gray-200">Compte</Link>
+              <Link to='/account' className="block px-4 py-2 hover:bg-gray-200">Compte</Link>
             </li>
             {(user && (!user.isCompany || user.isAdmin)) &&
               <li>

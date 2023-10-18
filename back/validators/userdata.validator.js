@@ -13,7 +13,8 @@ class UserDataValidator extends BaseValidator {
     id: Joi.string().uuid().required(),
     email: Joi.string().email(),
     password: Joi.string(),
-    validated: Joi.boolean().default(false),
+    newPassword: Joi.string(),
+    validated: Joi.boolean(),
     deleted: Joi.boolean().default(false),
   }).required();
   

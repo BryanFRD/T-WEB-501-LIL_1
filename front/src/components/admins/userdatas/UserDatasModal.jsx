@@ -104,7 +104,7 @@ const UserDatasModal = ({modalData, show, setShow, setDataList}) => {
         </div>
         <div className='flex flex-col gap-2'>
           <label>Mot de passe:</label>
-          <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.password} placeholder='Mot de passe' name='password' onChange={handleChange}/>
+          <input type="password" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.password} placeholder='Mot de passe' name='password' onChange={handleChange}/>
         </div>
         <div className='flex items-center gap-2'>
           <label>Compte validé:</label>

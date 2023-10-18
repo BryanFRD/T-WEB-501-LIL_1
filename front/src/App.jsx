@@ -9,6 +9,7 @@ import { UserContext } from './contexts/UserContext'
 import ErrorScreen from './screens/ErrorScreen'
 import AdminScreen from './screens/AdminScreen'
 import DisplayDetailsScreen from './screens/DisplayDetailsScreen'
+import AccountScreen from './screens/AccountScreen'
 
 function App() {
   const {user} = useContext(UserContext);
@@ -31,6 +32,9 @@ function App() {
             <Route path='admin' element={<AdminScreen />}/>
           }
           <Route path="ad_details/:id" element={<DisplayDetailsScreen/>}/>
+          {user &&
+            <Route path='account' element={<AccountScreen />}/>  
+          }
           <Route path='*' element={<ErrorScreen/>}/>
         </Route>
       </Routes>
