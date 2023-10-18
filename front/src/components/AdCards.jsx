@@ -1,14 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { Link } from 'react-router-dom';
 import Modal from './Modal';
 import ApplyingForm from './form/ApplyingForm';
+import Api from '../api/Api';
 
 
-const AdCards = ({ad}) => {
-
+const AdCards = ({ ad }) => {
     const {user} = useContext(UserContext); 
     const [showModal, setShowModal] = useState(false); 
+
 
     const openModal = () => {
         setShowModal(true); 
@@ -16,7 +17,8 @@ const AdCards = ({ad}) => {
 
     const closeModal = () => {
         setShowModal(false); 
-    }
+    }; 
+
 
     return (
 
