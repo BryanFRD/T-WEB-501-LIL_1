@@ -20,14 +20,15 @@ const ApplyingForm = ({adId}) => {
 
     useEffect(() => {
 
-        if (user) {
+        if (user && user.id) {
             Api.get(`/clients/${user.id}/userdata`)
                 .then((response) => {
+                    console.log("Réponse :", response.data)
                     const userData = response.data; 
                     setFormData({
                         lastname: user.lastname,
                         firstname: user.firstname,
-                        email: userData.email,
+                        email: userData.model.email,
                         phonenumber: user.phonenumber,
                         adId: adId,  
                 }); 
@@ -121,7 +122,7 @@ const ApplyingForm = ({adId}) => {
                 <div className='flex gap-2'>
 
                     <label className='mt-auto mb-auto basis-1/5'
-                    htmlFor='phonenumber'>Votre numéro de téléphone : </label>
+                    htmlFor='phonenumber'>Tél : </label>
 
                     <input required className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
                         overflow-auto basis-4/5'
@@ -129,6 +130,17 @@ const ApplyingForm = ({adId}) => {
                     onChange={handleInputChange}
                     value={formData.phonenumber}
                     />
+
+                </div>
+
+                <div className='flex gap-2'>
+
+                    <label className='mt-auto mb-auto basis-1/5'
+                     htmlFor='description'>Message au recruteur : </label>
+
+                    <textarea className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
+                        overflow-auto basis-4/5'
+                    id='description'></textarea>
 
                 </div>
 
