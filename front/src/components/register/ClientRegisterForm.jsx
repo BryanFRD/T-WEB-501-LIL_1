@@ -38,6 +38,7 @@ const ClientRegisterForm = () => {
       <Input hasError={errors.includes('firstname')} errorMessage='Veuillez indiquer votre prénom.' title={'Prénom'} placeholder={'Prénom'} name={'firstname'}/>
       <Input hasError={errors.includes('lastname')} errorMessage='Veuillez indiquer votre nom.' title={'Nom'} placeholder={'Nom'} name={'lastname'}/>
       <Input hasError={errors.includes('email')} errorMessage='Veuillez indiquer un mail valide.' title={`Email`} placeholder={'exemple@jobhub.fr'} name={'email'}/>
+      <Input hasError={errors.includes('phonenumber')} errorMessage='Veuillez indiquer un numéro valide' title={'Numéro de téléphone'} placeholder={'0600000000'} name={'phonenumber'} />
       <Input hasError={errors.includes('password')} errorMessage='Veuillez indiquer un mot de passe valide.' title={'Mot de passe'} placeholder={'********'} name={'password'} type='password'/>
       <div className="flex flex-col items-start justify-between">
         <button className="bg-primary hover:bg-primary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
