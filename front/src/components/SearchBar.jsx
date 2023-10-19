@@ -3,7 +3,6 @@ import Api from '../api/Api';
 import SearchIcon from './SearchIcon';
 import QuestionMarkIcon from './QuestionMarkIcon'; 
 import MapIcon from './MapIcon'; 
-import PlusIcon from'./PlusIcon'; 
 
 
 const SearchBar = () => {
@@ -28,11 +27,6 @@ const SearchBar = () => {
                 <MapIcon/>
                 <input id='jobplace' type='text' placeholder='Où ?'
                 className="py-2 px-3"/>
-            </div>
-            
-            <div className='flex items-center gap-1 shadow appearance-none border rounded py-2 px-3'>                
-                <PlusIcon/>
-                <p className='md:hidden'>Plus de critères</p>
             </div>
             
             <div className='flex items-center gap-1 shadow appearance-none border rounded w-auto py-2 px-3'>
