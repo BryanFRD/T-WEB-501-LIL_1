@@ -20,6 +20,7 @@ class AdController extends BaseController {
     this.model.findAndCountAll({
       where: {
         title: {[Op.like]: `%${data?.search ?? ''}%`},
+        place: {[Op.like]: `%${data?.place ?? ''}%`},
       },
       paranoid: !data.deleted,
     })

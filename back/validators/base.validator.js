@@ -11,6 +11,7 @@ class BaseValidator {
     search: Joi.string(),
     offset: Joi.number().min(0).default(0),
     limit: Joi.number().min(1).max(100).default(50),
+    place: Joi.string(),
     deleted: Joi.boolean().default(false)
   }).required();
   
