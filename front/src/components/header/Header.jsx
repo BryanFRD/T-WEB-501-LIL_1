@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 
 const Header = () => {
   return (
-  <header className='p-2 border-b-gray-600 border-b-2'>
+  <header className='p-2 shadow appearance-none border rounded text-dark leading-tight focus:outline-none focus:shadow-outline'>
     <Navbar/>
   </header>
   );

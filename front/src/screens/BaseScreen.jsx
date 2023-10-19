@@ -2,6 +2,8 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Header from '../components/header/Header';
+import Footer from '../components/footer/Footer';
+
 
 const BaseScreen = () => {
   return (
@@ -10,7 +12,9 @@ const BaseScreen = () => {
       <main className='flex-grow'>
         <Outlet />
       </main>
-      <footer></footer>
+
+      <Footer />
+
       <Toaster
         position="bottom-right"
         reverseOrder={true}
