@@ -5,6 +5,7 @@ import Modal from '../components/Modal';
 import ApplyingForm from '../components/form/ApplyingForm';
 import Api from '../api/Api';
 import AdAppliersCard from '../components/placeAd/AdAppliersCard';
+import moment from 'moment';
 
 const DisplayDetailsScreen = () => {
     const {id} = useParams(); 
@@ -93,7 +94,7 @@ const DisplayDetailsScreen = () => {
 
                 <div className='flex flex-row justify-end pr-3 gap-x-2 pt-5 pb-5'>
                     <p className='underline'>Annonce postée le :</p>
-                    <p className='italic'>{adData?.createdAt}</p>
+                    <p className='italic'>{moment(adData?.createdAt).format('DD/MM/YYYY')}</p>
                 </div>
                 <div className='flex flex-row gap-5 pb-6 pt-6 ml-auto mr-auto'>
 

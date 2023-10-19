@@ -4,14 +4,13 @@ import Api from '../api/Api';
 import { Axios } from 'axios';
 
 
-const DisplayCards = () => {
-
+const DisplayCards = ({search}) => {
     const [adData, setAdData] = useState([]); 
 
     useEffect(() => {
-
+        console.log("Test search :", search);
         const loadDatas = () => {
-            Api.get('/ads')
+            Api.get('/ads', {params: {search: search.searchJob, place: search.jobPlace}})
                 .then((response) => {
                     console.log("Test response : ", response);
                     console.log("Test models :", response.data.models); 
@@ -23,17 +22,14 @@ const DisplayCards = () => {
         }
 
         loadDatas(); 
-    }, []); 
+    }, [search]); 
 
     return (
         <div className='flex flex-col pt-6 gap-3 text-center w-5/6
         md:grid md:grid-cols-3 md:w-11/12'>
             {adData.map((data) => (
                 <AdCards 
-                    ad={{
-                        id: data.id,
-                        title: data.title, 
-                        description: data.description,}} 
+                    ad={data} 
                     key={data.id} />
             ))}
 
