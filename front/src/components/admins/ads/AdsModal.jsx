@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Modal from '../../Modal';
 import AsyncSelect from 'react-select/async';
 import Api from '../../../api/Api';
 import toast from 'react-hot-toast';
+import { UserContext } from '../../../contexts/UserContext';
 
 const AdsModal = ({modalData, show, setShow, setDataList}) => {
+  const {user} = useContext(UserContext);
   const [data, setData] = useState({
     title: '',
     description: '',
@@ -191,10 +193,12 @@ const AdsModal = ({modalData, show, setShow, setDataList}) => {
           <label>Status:</label>
           <input type="text" className='border-b-2 border-primary rounded bg-slate-200 py-1 px-2' value={data.status} placeholder='Status' name='status' onChange={handleChange}/>
         </div>
-        <div className='flex flex-col gap-2'>
-          <label>Entreprise:</label>
-          <AsyncSelect placeholder='Entreprise' defaultOptions isClearable loadOptions={loadCompaniesOptions} value={data.company} name='company' onChange={handleCompanyChange} />
-        </div>
+        {user?.isAdmin &&
+          <div className='flex flex-col gap-2'>
+            <label>Entreprise:</label>
+            <AsyncSelect placeholder='Entreprise' defaultOptions isClearable loadOptions={loadCompaniesOptions} value={data.company} name='company' onChange={handleCompanyChange} />
+          </div>  
+        }
         <div className='flex flex-col gap-2'>
           <label>Types de contrat:</label>
           <AsyncSelect placeholder='Types de contrat' defaultOptions isClearable loadOptions={loadContractTypesOptions} value={data.contractTypes} name='contractTypes' onChange={handleContractTypesChange} isMulti/>

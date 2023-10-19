@@ -20,7 +20,7 @@ const UserContextProvider = (props) => {
       const isAdmin = await Api.get('/auth/isadmin').then(() => true).catch(() => false);
       
       userAccount.isAdmin = isAdmin;
-      userAccount.isCompany = userAccount?.name;
+      userAccount.isCompany = userAccount?.name && !isAdmin;
       
       setUser(userAccount);
     }

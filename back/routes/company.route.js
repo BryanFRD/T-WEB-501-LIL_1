@@ -6,6 +6,7 @@ const companyController = new CompanyController();
 router.get('/companies', companyController.findAll);
 router.get('/companies/:id', companyController.findByPk);
 router.get('/companies/:id/userdata', companyController.findUserData);
+router.get('/companies/:id/ads', companyController.findAds);
 router.post('/companies', companyController.create);
 router.put('/companies/:id', companyController.update);
 router.delete('/companies/:id', companyController.delete);

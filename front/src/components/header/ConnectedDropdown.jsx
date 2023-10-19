@@ -25,14 +25,14 @@ const ConnectedDropdown = () => {
             <li>
               <Link to='/account' className="block px-4 py-2 hover:bg-gray-200">Compte</Link>
             </li>
-            {(user && (!user.isCompany || user.isAdmin)) &&
+            {(user && (!user.isCompany && !user.isAdmin)) &&
               <li>
-                <Link to='/' className="block px-4 py-2 hover:bg-gray-200">Mes&nbsp;candidatures</Link>
+                <Link to='/ad_applied' className="block px-4 py-2 hover:bg-gray-200">Mes&nbsp;candidatures</Link>
               </li>
             }
-            {(user?.isCompany || user?.isAdmin) &&
+            {user?.isCompany &&
               <li>
-                <Link to='/' className="block px-4 py-2 hover:bg-gray-200">Mes&nbsp;annonces</Link>
+                <Link to='/company_ads' className="block px-4 py-2 hover:bg-gray-200">Mes&nbsp;annonces</Link>
               </li>
             }
             {user?.isAdmin &&

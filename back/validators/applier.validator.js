@@ -16,6 +16,11 @@ class ApplierValidator extends BaseValidator {
     adId: Joi.string().uuid().required(),
   }).required();
   
+  #findByEmail = Joi.object({
+    email: Joi.string().email().required(),
+    deleted: Joi.boolean().default(false),
+  }).required();
+  
   #update = Joi.object({
     id: Joi.string().uuid().required(),
     firstname: Joi.string(),
@@ -27,6 +32,10 @@ class ApplierValidator extends BaseValidator {
   
   validateFindAd = (data, options) => {
     return this.validate(this.#findAd, data, options);
+  }
+  
+  validateFindByEmail = (data, options) => {
+    return this.validate(this.#findByEmail, data, options);
   }
   
   validateCreate = (data, options) => {

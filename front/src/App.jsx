@@ -10,6 +10,8 @@ import ErrorScreen from './screens/ErrorScreen'
 import AdminScreen from './screens/AdminScreen'
 import DisplayDetailsScreen from './screens/DisplayDetailsScreen'
 import AccountScreen from './screens/AccountScreen'
+import CompanyAdsScreen from './screens/CompanyAdsScreen'
+import AdAppliedScreen from './screens/AdAppliedScreen'
 
 function App() {
   const {user} = useContext(UserContext);
@@ -25,8 +27,14 @@ function App() {
               <Route path='register' element={<RegisterScreen />}/>
             </>
           )}
+          {(user && !user.isCompany && !user.isAdmin) && (
+            <Route path='ad_applied' element={<AdAppliedScreen/>}/>
+          )}
           {user?.isCompany &&
-            <Route path='place_ad' element={<PlaceAdScreen/>}/>
+            <>
+              <Route path='place_ad' element={<PlaceAdScreen/>}/>
+              <Route path='company_ads' element={<CompanyAdsScreen />}/>
+            </>
           }
           {user?.isAdmin &&
             <Route path='admin' element={<AdminScreen />}/>

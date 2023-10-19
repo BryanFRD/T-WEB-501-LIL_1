@@ -13,6 +13,11 @@ class AdValidator extends BaseValidator {
     deleted: Joi.boolean().default(false)
   }).required();
   
+  #findAppliers = Joi.object({
+    id: Joi.string().uuid().required(),
+    deleted: Joi.boolean().default(false)
+  }).required();
+  
   #create = Joi.object({
     title: Joi.string().required(),
     description: Joi.string().required(),
@@ -42,6 +47,10 @@ class AdValidator extends BaseValidator {
   
   validateFindContractTypes = (data, options) => {
     return this.validate(this.#findContractTypes, data, options);
+  }
+  
+  validateFindAppliers = (data, options) => {
+    return this.validate(this.#findAppliers, data, options);
   }
   
   validateCreate = (data, options) => {

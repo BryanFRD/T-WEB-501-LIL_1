@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Ad.belongsToMany(models.ContractType, {through: 'AdContractType'});
       Ad.belongsTo(models.Company, {constraints: false, foreignKey: 'companyId', as: 'company'});
+      Ad.hasMany(models.Appliers, {constraints: false, foreignKey: 'adId', as: 'appliers'})
     }
   }
   Ad.init({

@@ -8,6 +8,11 @@ class CompanyValidator extends BaseValidator {
     deleted: Joi.boolean().default(false),
   }).required();
   
+  #findAds = Joi.object({
+    id: Joi.string().uuid().required(),
+    deleted: Joi.boolean().default(false)
+  }).required();
+  
   #create = Joi.object({
     name: Joi.string().required(),
     description: Joi.string(),
@@ -25,6 +30,10 @@ class CompanyValidator extends BaseValidator {
   
   validateFindUserData = (data, options) => {
     return this.validate(this.#findsUserData, data, options);
+  }
+  
+  validateFindAds = (data, options) => {
+    return this.validate(this.#findAds, data, options);
   }
   
   validateCreate = (data, options) => {

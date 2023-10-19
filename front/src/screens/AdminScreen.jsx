@@ -17,7 +17,7 @@ import UserDatasModal from '../components/admins/userdatas/UserDatasModal';
 
 const AdminScreen = () => {
   const [showModal, setShowModal] = useState(false);
-  const [modalData, setModalData] = useState({method: 'CREATE', data: undefined, updateData: undefined})
+  const [modalData, setModalData] = useState({method: 'CREATE', data: undefined, updateData: undefined});
   const tabs = {
     ads: {title: 'Annonces', card: AdsCards, modal: AdsModal, url: '/ads/'},
     contracttypes: {title: 'Type de contrat', card: ContractTypesCard, modal: ContractTypesModal, url: '/contracttypes/'},
