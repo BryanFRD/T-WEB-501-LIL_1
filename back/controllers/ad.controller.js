@@ -20,6 +20,7 @@ class AdController extends BaseController {
     this.model.findAndCountAll({
       where: {
         title: {[Op.like]: `%${data?.search ?? ''}%`},
+        place: {[Op.like]: `%${data?.place ?? ''}%`},
       },
       paranoid: !data.deleted,
     })
@@ -59,6 +60,23 @@ class AdController extends BaseController {
     })
       .then(async (model) => {
         res.status(200).json({success: true, models: await model?.getContractTypes()})
+      })
+      .catch((err) => res.status(400).json({success: false, message: err.message}))
+  }
+  
+  findAppliers = (req, res) => {
+    const response = this.validator.validateFindAppliers(req.datas);
+    const data = response?.value;
+    
+    if(!data){
+      return res.status(400).json({success: false, message: response.error});
+    }
+    
+    this.model.findByPk(data.id, {
+      paranoid: !data.deleted,
+    })
+      .then(async (model) => {
+        res.status(200).json({success: true, models: await model?.getAppliers()})
       })
       .catch((err) => res.status(400).json({success: false, message: err.message}))
   }

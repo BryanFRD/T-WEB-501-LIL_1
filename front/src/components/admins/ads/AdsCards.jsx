@@ -1,8 +1,11 @@
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Api from '../../../api/Api';
+import { UserContext } from '../../../contexts/UserContext';
+import { Link } from 'react-router-dom';
 
 const AdsCards = ({data, handleModalData}) => {
+  const {user} = useContext(UserContext);
   const [dt, setDt] = useState(data);
   
   const handleUpdate = () => {
@@ -95,6 +98,9 @@ const AdsCards = ({data, handleModalData}) => {
         </div>
       </div>
       <div className='flex flex-col gap-4'>
+        {user?.isCompany &&
+          <Link to={`/ad_details/${dt.id}`} className='py-2 px-4 text-center border-2 border-primary rounded text-primary hover:text-white hover:bg-primary transition-all font-semibold'>Voir</Link>
+        }
         <button className='py-2 px-4 bg-primary hover:bg-primary-darker text-white font-semibold rounded whitespace-nowrap' onClick={handleUpdate}>Mettre à jour</button>
         <button className={`py-2 px-4 ${dt.deletedAt ? 'bg-orange-600 hover:bg-orange-700' : 'bg-red-600 hover:bg-red-700'} text-white font-semibold rounded whitespace-nowrap`} onClick={handleDelete}>{dt.deletedAt ? 'Restaurer' : 'Supprimer'}</button>
       </div>
