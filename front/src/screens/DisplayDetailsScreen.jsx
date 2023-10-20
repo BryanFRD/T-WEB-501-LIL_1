@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../contexts/UserContext';
-import { Link, Route, Routes, useParams} from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import Modal from '../components/Modal';
 import ApplyingForm from '../components/form/ApplyingForm';
 import Api from '../api/Api';
@@ -47,25 +47,19 @@ const DisplayDetailsScreen = () => {
     }
 
     return (
-
         <div className='flex flex-col gap-8'>
-
             <div className='shadow appearance-none border rounded text-dark leading-tight focus:outline-none focus:shadow-outline
             w-11/12 flex flex-col ml-auto mr-auto mt-6'>
-
                 <div className='ml-auto mr-auto'>
                     <h1 className='mt-3 mb-6 text-2xl'><strong>{adData?.title}</strong></h1>
                 </div>
-                
                 <div className='text-left pl-3 pr-3 indent-4'>
                     <p>{adData?.description}</p>
                 </div>
-                
                 <div className='pt-5 pb-5 flex flex-col gap-y-4'>
                     <div className='flex flex-row gap-x-2 pl-3'>
                         <p className='underline font-bold'>Type de contrat : </p>
                         <p>{adDataContractType.join(', ')}</p>
-                        {console.log(adDataContractType)}
                     </div>
                     
                     <div className='flex flex-row gap-x-2 pl-3'>
@@ -89,9 +83,6 @@ const DisplayDetailsScreen = () => {
                     </div>
                 
                 </div>
-                
-
-
                 <div className='flex flex-row justify-end pr-3 gap-x-2 pt-5 pb-5'>
                     <p className='underline'>Annonce postée le :</p>
                     <p className='italic'>{moment(adData?.createdAt).format('DD/MM/YYYY')}</p>
