@@ -1,5 +1,5 @@
-import React from 'react';
 import CloseIcon from './icons/CloseIcon';
+import PropTypes from 'prop-types';
 
 const Modal = ({ children, show, setShow, title }) => {
   return (
@@ -16,5 +16,12 @@ const Modal = ({ children, show, setShow, title }) => {
     </div>
   );
 };
+
+Modal.propTypes = {
+  children: PropTypes.node.isRequired,
+  show: PropTypes.bool.isRequired,
+  setShow: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired
+}
 
 export default Modal;

@@ -12,9 +12,7 @@ const BaseScreen = () => {
       <main className='flex-grow'>
         <Outlet />
       </main>
-
       <Footer />
-
       <Toaster
         position="bottom-right"
         reverseOrder={true}

@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React from 'react';
+import PropTypes from 'prop-types';
 
 const AdAppliersCard = ({applier}) => {
   
@@ -34,5 +34,9 @@ const AdAppliersCard = ({applier}) => {
     </div>
   );
 };
+
+AdAppliersCard.propTypes = {
+  applier: PropTypes.object.isRequired
+}
 
 export default AdAppliersCard;

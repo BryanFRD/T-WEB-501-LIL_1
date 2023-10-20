@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Api from '../api/Api';
+import PropTypes from 'prop-types';
 
 const AdAppliedCard = ({data}) => {
   const [dt, setDt] = useState(data);
@@ -41,5 +42,9 @@ const AdAppliedCard = ({data}) => {
     </div>
   );
 };
+
+AdAppliedCard.propTypes = {
+  data: PropTypes.object.isRequired
+}
 
 export default AdAppliedCard;
