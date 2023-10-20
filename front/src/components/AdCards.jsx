@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import Modal from './Modal';
 import ApplyingForm from './form/ApplyingForm';
 import Api from '../api/Api';
-import MapIcons from './icons/MapIcons';
-import ContractIcons from './icons/ContractIcons';
+import MapIcons from './icons/MapIcon';
+import ContractIcons from './icons/ContractIcon';
 
 const AdCards = ({ ad }) => {
     const {user} = useContext(UserContext); 

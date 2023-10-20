@@ -1,5 +1,5 @@
 import React from 'react';
-import CloseIcon from './icons/CloseIcons';
+import CloseIcon from './icons/CloseIcon';
 
 const Modal = ({ children, show, setShow, title }) => {
   return (

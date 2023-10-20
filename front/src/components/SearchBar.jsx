@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import SearchIcon from './SearchIcon';
-import QuestionMarkIcon from './QuestionMarkIcon'; 
-import MapIcon from './MapIcon'; 
+import SearchIcon from './icons/SearchIcon';
+import QuestionMarkIcon from './icons/QuestionMarkIcon'; 
+import MapIcon from './icons/MapIcon'; 
 
 const SearchBar = ({setSearch}) => {
     const [searchData, setSearchData] = useState({
@@ -22,7 +22,6 @@ const SearchBar = ({setSearch}) => {
 
         <form onSubmit={handleSubmit} className='grid grid-flow-cols items-center gap-3
         md:flex md:flex-row'>
-
             <div className='flex items-center gap-1 shadow appearance-none border rounded w-full text-dark leading-tight focus:outline-none focus:shadow-outline'>
                 <QuestionMarkIcon/>
                 <input id='searchedjob' type='text' placeholder='Emploi recherché ?'
