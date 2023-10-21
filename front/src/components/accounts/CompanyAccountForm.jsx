@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 const CompanyAccountForm = ({handleSubmit, data, handleInputChange}) => {
   return (
@@ -19,5 +19,11 @@ const CompanyAccountForm = ({handleSubmit, data, handleInputChange}) => {
     </form>
   );
 };
+
+CompanyAccountForm.propTypes = {
+  handleSubmit: PropTypes.func,
+  data: PropTypes.object,
+  handleInputChange: PropTypes.func,
+}
 
 export default CompanyAccountForm;

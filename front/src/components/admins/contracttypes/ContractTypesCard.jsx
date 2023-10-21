@@ -1,6 +1,7 @@
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Api from '../../../api/Api';
+import PropTypes from 'prop-types';
 
 const ContractTypesCard = ({data, handleModalData}) => {
   const [dt, setDt] = useState(data);
@@ -46,5 +47,10 @@ const ContractTypesCard = ({data, handleModalData}) => {
     </div>
   );
 };
+
+ContractTypesCard.propTypes = {
+  data: PropTypes.object,
+  handleModalData: PropTypes.func
+}
 
 export default ContractTypesCard;

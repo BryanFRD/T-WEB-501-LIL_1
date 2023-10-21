@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import Api from '../../api/Api';
+import PropTypes from 'prop-types';
 
 const ApplyingForm = ({adId}) => {
 
@@ -155,6 +155,10 @@ const ApplyingForm = ({adId}) => {
     );
 
 
-}; 
+};
+
+ApplyingForm.propTypes = {
+    adId: PropTypes.number,
+}
 
 export default ApplyingForm;

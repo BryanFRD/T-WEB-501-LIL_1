@@ -4,7 +4,7 @@ const Subscribe = () => {
   return (
     <div className='text-center
     md:col-start-6 md:m-auto'>
-    <ButtonLink to='register' className='bg-primary hover:bg-primary-darker text-white rounded p-1'>
+    <ButtonLink to='register' className='bg-primary hover:bg-primary-darker text-white rounded'>
       S'inscrire
     </ButtonLink>
     </div>

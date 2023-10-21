@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Api from '../../../api/Api';
 import toast from 'react-hot-toast';
 import Modal from '../../Modal';
 import AsyncSelect from 'react-select/async';
+import PropTypes from 'prop-types';
 
 const ClientsModal = ({modalData, show, setShow, setDataList}) => {
   const [data, setData] = useState({
@@ -155,5 +156,12 @@ const ClientsModal = ({modalData, show, setShow, setDataList}) => {
     </Modal>
   );
 };
+
+ClientsModal.propTypes = {
+  modalData: PropTypes.object,
+  show: PropTypes.bool,
+  setShow: PropTypes.func,
+  setDataList: PropTypes.func
+}
 
 export default ClientsModal;

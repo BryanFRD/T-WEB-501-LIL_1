@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ErrorScreen = () => {
   return (
     <div className='flex justify-center items-center h-full text-red-600'>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const AdminAccountForm = ({handleSubmit, data, handleInputChange}) => {
   return (
@@ -19,5 +19,11 @@ const AdminAccountForm = ({handleSubmit, data, handleInputChange}) => {
     </form>
   );
 };
+
+AdminAccountForm.propTypes = {
+  handleSubmit: PropTypes.func,
+  data: PropTypes.object,
+  handleInputChange: PropTypes.func,
+}
 
 export default AdminAccountForm;

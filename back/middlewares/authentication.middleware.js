@@ -43,25 +43,25 @@ const authenticateToken = async (req, res, next) => {
       return res.status(401).json({success: false, message: 'Unanthorized'});
     }
     
-    let user = await sequelize.models.Client.findOne({where: {associatedId: userData.id}})
+    let user = await sequelize.models.Client.findOne({where: {associatedId: userData.id}, include: ['userData']})
       .then((user) => user)
       .catch(() => null);
     if(!user){
-      user = await sequelize.models.Company.findOne({where: {associatedId: userData.id}})
+      user = await sequelize.models.Company.findOne({where: {associatedId: userData.id}, include: ['userData']})
         .then((user) => user)
         .catch(() => null);
     }
     
     if(!user){
-      user = await sequelize.models.Admin.findOne({where: {associatedId: userData.id}})
+      user = await sequelize.models.Admin.findOne({where: {associatedId: userData.id}, include: ['userData']})
         .then((user) => user)
-        .catch(() => null);
+        .catch(console);
       
       if(user)
         user.isAdmin = true;
     }
     
-    if(user && restrictedRoute({user, body: req.body ?? {}})){
+    if(user && restrictedRoute({user, datas: req.datas ?? {}})){
       req.user = user;
       req.user.isAdmin = user.isAdmin ?? false;
       return next();

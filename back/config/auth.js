@@ -1,3 +1,5 @@
+const isSelf = (user, datas) => user.userData?.id === datas.id;
+
 const config = {
   RESTRICTED_ROUTES: {
     'GET/admins': ({user}) => user.isAdmin,
@@ -7,7 +9,7 @@ const config = {
     'GET/userdata': ({user}) => user.isAdmin,
     'GET/userdata/:id': ({user}) => user.isAdmin,
     'GET/auth/isadmin': ({user}) => user.isAdmin,
-    'PUT/userdata/:id': ({user, datas}) => user.isAdmin,
+    'PUT/userdata/:id': ({user, datas}) => user.isAdmin || isSelf(user, datas),
   }
 }
 

@@ -16,14 +16,14 @@ class CompanyValidator extends BaseValidator {
   #create = Joi.object({
     name: Joi.string().required(),
     description: Joi.string(),
-    phonenumber: Joi.string(),
+    phonenumber: Joi.string().regex(/^(?:0|\+33 ?|0?0?33 ?|)([1-9] ?(?:[0-9] ?){8})$/i).required(),
     associatedId: Joi.string().uuid(),
   }).required();
   
   #update = Joi.object({
     name: Joi.string(),
     description: Joi.string(),
-    phonenumber: Joi.string(),
+    phonenumber: Joi.string().regex(/^(?:0|\+33 ?|0?0?33 ?|)([1-9] ?(?:[0-9] ?){8})$/i),
     associatedId: Joi.string().uuid(),
     deleted: Joi.boolean().default(false),
   }).required();

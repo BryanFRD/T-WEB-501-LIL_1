@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Api from '../../../api/Api';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 const UserDatasCard = ({data, handleModalData}) => {
   const [dt, setDt] = useState(data);
@@ -50,5 +51,10 @@ const UserDatasCard = ({data, handleModalData}) => {
     </div>
   );
 };
+
+UserDatasCard.propTypes = {
+  data: PropTypes.object,
+  handleModalData: PropTypes.func
+}
 
 export default UserDatasCard;

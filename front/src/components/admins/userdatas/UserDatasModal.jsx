@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from '../../Modal';
-import AsyncSelect from 'react-select/async';
 import Api from '../../../api/Api';
 import toast from 'react-hot-toast';
+import PropTypes from 'prop-types';
 
 const UserDatasModal = ({modalData, show, setShow, setDataList}) => {
   const [data, setData] = useState({
@@ -120,6 +120,13 @@ const UserDatasModal = ({modalData, show, setShow, setDataList}) => {
       </form>
     </Modal>
   );
+};
+
+UserDatasModal.propTypes = {
+  modalData: PropTypes.object,
+  show: PropTypes.bool,
+  setShow: PropTypes.func,
+  setDataList: PropTypes.func
 };
 
 export default UserDatasModal;

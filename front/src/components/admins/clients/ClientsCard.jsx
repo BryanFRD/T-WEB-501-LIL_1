@@ -1,6 +1,7 @@
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Api from '../../../api/Api';
+import PropTypes from 'prop-types';
 
 const ClientsCard = ({data, handleModalData}) => {
   const [dt, setDt] = useState(data);
@@ -68,6 +69,11 @@ const ClientsCard = ({data, handleModalData}) => {
       </div>
     </div>
   );
+};
+
+ClientsCard.propTypes = {
+  data: PropTypes.object.isRequired,
+  handleModalData: PropTypes.func.isRequired
 };
 
 export default ClientsCard;

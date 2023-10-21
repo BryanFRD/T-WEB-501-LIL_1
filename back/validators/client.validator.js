@@ -11,7 +11,7 @@ class ClientValidator extends BaseValidator {
   #create = Joi.object({
     firstname: Joi.string().required(),
     lastname: Joi.string().required(),
-    phonenumber: Joi.string(),
+    phonenumber: Joi.string().regex(/^(?:0|\+33 ?|0?0?33 ?|)([1-9] ?(?:[0-9] ?){8})$/i).required(),
     description: Joi.string(),
     associatedId: Joi.string().uuid(),
   }).required();
@@ -20,7 +20,7 @@ class ClientValidator extends BaseValidator {
     id: Joi.string().uuid().required(),
     firstname: Joi.string(),
     lastname: Joi.string(),
-    phonenumber: Joi.string(),
+    phonenumber: Joi.string().regex(/^(?:0|\+33 ?|0?0?33 ?|)([1-9] ?(?:[0-9] ?){8})$/i),
     description: Joi.string(),
     associatedId: Joi.string().uuid(),
     deleted: Joi.boolean().default(false),

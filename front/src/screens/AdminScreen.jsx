@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Api from '../api/Api';
 import AdsCards from '../components/admins/ads/AdsCards';
 import AdsModal from '../components/admins/ads/AdsModal';

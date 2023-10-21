@@ -39,11 +39,16 @@ class BaseValidator {
     return this.validate(this.#restore, data, options);
   }
   
-  validate = (schema, data, options = {stripUnknown: true, abortEarly: false}) => {
-    const response = schema.validate(data, options);
+  validate = (schema, data, options) => {
+    const updatedOptions = {
+      ...{stripUnknown: true, abortEarly: false},
+      ...options ?? {},
+    }
+    
+    const response = schema.validate(data, updatedOptions);
     
     if(response.error){
-      response.error.details = response.error?.details?.length > 0 ? response.error.details[0]?.context?.details?.map(({context, message}) => ({key: context.key, message})) : [];
+      response.error.details = response.error?.details?.length > 0 ? response.error.details[0]?.context?.details?.map(({context, message, type}) => ({key: context.key, message, type})) : [];
     }
     
     return response;
