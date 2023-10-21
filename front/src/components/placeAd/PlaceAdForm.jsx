@@ -13,7 +13,7 @@ const PlaceAdForm = () => {
     description: '',
     wages: '', 
     place: '', 
-    workingTime: '', 
+    workingTime: '',
     contractTypes: [],
   });
   

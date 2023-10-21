@@ -1,15 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import ButtonLink from '../ButtonLink';
 
 const Subscribe = () => {
-    return (
-        <div className='text-center
-        md:col-start-6 md:m-auto'>
-        <Link to='register' className='bg-blue-900 text-white rounded p-1'>
-            S'inscrire
-        </Link>
-        </div>
-    );
+  return (
+    <div className='text-center
+    md:col-start-6 md:m-auto'>
+    <ButtonLink to='register' className='bg-primary hover:bg-primary-darker text-white rounded p-1'>
+      S'inscrire
+    </ButtonLink>
+    </div>
+  );
 };
 
 export default Subscribe;

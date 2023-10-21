@@ -6,6 +6,7 @@ import ApplyingForm from '../components/form/ApplyingForm';
 import Api from '../api/Api';
 import AdAppliersCard from '../components/placeAd/AdAppliersCard';
 import moment from 'moment';
+import ButtonLink from '../components/ButtonLink';
 
 const DisplayDetailsScreen = () => {
     const {id} = useParams(); 
@@ -20,16 +21,16 @@ const DisplayDetailsScreen = () => {
             .then((response) => {
                 setAdData(response.data.model)
             }) 
-            .catch((error) => {
-                console.error("Erreur lors de la requête", error); 
+            .catch(() => {
+                setAdData({});
             }); 
         Api.get(`/ads/${id}/contracttypes`)
             .then((response) => {
                 const contractTypes = response.data.models.map((contractType) => contractType.name)
                 setAdDataContractType(contractTypes); 
             })
-            .catch((error) => {
-                console.error("Erreur lors de la requête :", response)
+            .catch(() => {
+                setAdDataContractType([]);
             }); 
         Api.get(`/ads/${id}/appliers`)
             .then(({data}) => {
@@ -89,9 +90,9 @@ const DisplayDetailsScreen = () => {
                 </div>
                 <div className='flex flex-row gap-5 pb-6 pt-6 ml-auto mr-auto'>
 
-                    {!user?.name && <button onClick={openModal} 
-                    className='border-2 rounded p-3 border-solid border-black
-                    hover:bg-black hover:text-white'>Candidater</button>}
+                    {!user?.name && <ButtonLink onClick={openModal} 
+                    className='border-2 rounded p-3 border-solid text-primary border-primary
+                    hover:bg-primary hover:text-slate-50'>Candidater</ButtonLink>}
 
                         {showModal && (
                             <Modal show={showModal} setShow={closeModal} title="Candidater">
@@ -99,19 +100,19 @@ const DisplayDetailsScreen = () => {
                             </Modal>
                         )}
 
-                    {user?.name && <button className='rounded p-3 text-white bg-black
-                    hover:border-black hover:border-solid hover:border-2 hover:bg-white hover:text-black'>Modifier</button>}
+                    {user?.name && <ButtonLink className='rounded text-white bg-primary
+                    hover:border-primary hover:border-solid border-2 hover:bg-slate-50 hover:text-primary'>Modifier</ButtonLink>}
                 
                 </div>
             </div>
-            <h2 className='text-center text-xl font-semibold'>Candidatures:</h2>
-            <div className='flex justify-center items-center mb-8'>
-                {(user?.isCompany || user?.isAdmin) &&
-                <>
+            {(user?.isCompany || user?.isAdmin) &&
+            <>
+                <h2 className='text-center text-xl font-semibold'>Candidatures:</h2>
+                <div className='flex justify-center items-center mb-8'>
                     {appliers.map((applier) => <AdAppliersCard key={applier} applier={applier}/>)}
-                </>
-                }
-            </div>
+                </div>
+            </>
+            }
         </div>
     
     );

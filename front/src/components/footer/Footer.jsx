@@ -1,5 +1,5 @@
 import React from 'react';
-import CopyrightIcon from './CopyrightIcon';
+import CopyrightIcon from '../icons/CopyrightIcon';
 
 const Footer = () => {
     return (

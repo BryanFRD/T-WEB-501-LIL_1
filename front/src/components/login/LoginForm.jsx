@@ -4,6 +4,7 @@ import Api from '../../api/Api';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
+import ButtonLink from '../ButtonLink';
 
 const LoginForm = () => {
   const {setUser} = useContext(UserContext);
@@ -11,6 +12,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   
   const handleSubmit = (e) => {
+    console.log('handleSubmit')
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget));
     setErrors([]);
@@ -46,7 +48,7 @@ const LoginForm = () => {
       <Input hasError={errors.includes('email')} errorMessage='Veuillez indiquer un mail valide.' title={`Email`} placeholder={'exemple@jobhub.fr'} name={'email'}/>
       <Input hasError={errors.includes('password')} errorMessage='Veuillez indiquer un mot de passe valide.' title={'Mot de passe'} placeholder={'********'} name={'password'} type='password'/>
       <div className="flex flex-col items-start justify-between">
-        <button className="bg-primary hover:bg-primary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+        <button className="px-4 py-2 font-semibold transition-all bg-primary hover:bg-primary-darker text-white rounded focus:outline-none focus:shadow-outline" type="submit">
           Connexion
         </button>
       </div>
