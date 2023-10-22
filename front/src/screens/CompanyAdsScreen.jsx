@@ -21,7 +21,7 @@ const CompanyAdsScreen = () => {
       return;
     }
     
-    Api.get(`/companies/${user.id}/ads`)
+    Api.get(`/companies/${user.id}/ads`, {params: {deleted: true}})
       .then(({data}) => setData(data.models))
       .catch(() => setData([]));
   }, [user]);
