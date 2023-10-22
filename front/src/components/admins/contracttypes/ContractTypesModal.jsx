@@ -87,7 +87,7 @@ const ContractTypesModal = ({modalData, show, setShow, setDataList}) => {
   }, [modalData]);
   
   return (
-    <Modal show={show} title={'Type de contrat'} setShow={setShow}>
+    <Modal show={show} title={'type de contrat'} setShow={setShow}>
       <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-2'>
           <label>Titre:</label>

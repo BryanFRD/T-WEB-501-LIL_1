@@ -45,7 +45,7 @@ const AdCards = ({ ad }) => {
           <span>{contractTypes}</span>
         </div>
       }
-      <div className='flex justify-center gap-3'>
+      <div className='flex flex-col sm:flex-row justify-center gap-3'>
         <ButtonLink 
           to={'/ad_details/' + ad?.id}
           className='bg-primary text-white rounded hover:bg-primary-darker'>
@@ -63,7 +63,7 @@ const AdCards = ({ ad }) => {
             show={showModal}
             setShow={closeModal}
             title="Candidater">
-              <ApplyingForm adId={ad.id} />
+              <ApplyingForm adId={ad.id} closeModal={closeModal} />
           </Modal>
         }
         </div>

@@ -131,7 +131,7 @@ const AppliersModal = ({modalData, show, setShow, setDataList}) => {
   }, [modalData]);
   
   return (
-    <Modal show={show} title={'admin'} setShow={setShow}>
+    <Modal show={show} title={'candidature'} setShow={setShow}>
       <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-2'>
           <label>Nom:</label>

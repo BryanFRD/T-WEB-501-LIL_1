@@ -4,65 +4,58 @@ import toast from 'react-hot-toast';
 import Api from '../../api/Api';
 import PropTypes from 'prop-types';
 
-const ApplyingForm = ({adId}) => {
-
+const ApplyingForm = ({adId, closeModal}) => {
     const {user} = useContext(UserContext); 
-
-    console.log(user)
 
     const [formData, setFormData] = useState({
         lastname: '', 
         firstname: '', 
         email : '', 
         phonenumber: '' ,
-        adId: adId, 
+        adId: adId,
+        message: ''
     }); 
 
     useEffect(() => {
-
         if (user && user.id) {
             Api.get(`/clients/${user.id}/userdata`)
                 .then((response) => {
-                    console.log("Réponse :", response.data)
                     const userData = response.data; 
                     setFormData({
                         lastname: user.lastname,
                         firstname: user.firstname,
                         email: userData.model.email,
                         phonenumber: user.phonenumber,
-                        adId: adId,  
+                        adId: adId,
+                        message: ''
                 }); 
-
             })
-
-            .catch((error) => {
-                console.error('Erreur lors de la récupération des données utilisateur', error); 
-            });
+            .catch(() => {});
         }
     }, [user, adId]); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-            
             try {
                 const response = await Api.post('/appliers', formData); 
-                if (response.status === 200) {
-                toast.success('Formulaire envoyé avec succès !'); 
-                console.log('Formulaire envoyé avec succès.'); 
+                console.log(response)
+                if (response.status === 201) {
+                toast.success('Formulaire envoyé avec succès !');
                 setFormData({
                     lastname: '', 
                     firstname : '', 
                     email: '', 
                     phonenumber: '', 
                     adId: adId, 
-                });  
+                    message: ''
+                });
+                closeModal();
             }
-    } catch (error) {
-        console.error('Erreur lors de la soumission du formulaire', error); 
-        toast.error('Erreur lors de la soumission du formulaire. '); 
+        } catch (error) {
+            toast.error('Erreur lors de la soumission du formulaire. ');
+        }
     }; 
-    }; 
-
+    
     const handleInputChange = (e) => {
         const { name, value } = e.target; 
         setFormData({
@@ -70,91 +63,65 @@ const ApplyingForm = ({adId}) => {
             [name] : value
         }); 
     }; 
-
     return (
-
         <div>
-
             <form onSubmit={handleSubmit} className='flex gap-6 flex-col'>
-
-                <div className='flex gap-2'>
-
+                <div className='flex flex-col md:flex-row gap-2'>
                     <label className='mt-auto mb-auto basis-1/5'
-                    htmlFor='lastname'>Votre nom :</label>
-
+                    htmlFor='lastname'>Votre nom:</label>
                     <input required className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
                         overflow-auto basis-4/5'
                     type="text" name='lastname' id='lastname'
                     onChange={handleInputChange}
                     value={formData.lastname}
                      />
-
                 </div>
-
-                <div className='flex gap-2'>
-
+                <div className='flex flex-col md:flex-row gap-2'>
                     <label className='mt-auto mb-auto basis-1/5'
-                    htmlFor='firstname'>Votre prénom :</label>
-
+                    htmlFor='firstname'>Votre prénom:</label>
                     <input required className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
                         overflow-auto basis-4/5'
                     type="text" name='firstname' id='firstname'
                     onChange={handleInputChange}
                     value={formData.firstname}
                     />
-
                 </div>
-
-                <div className='flex gap-2'>
-
+                <div className='flex flex-col md:flex-row gap-2'>
                     <label className='mt-auto mb-auto basis-1/5'
-                    htmlFor='email'>Votre email :</label>
-
+                    htmlFor='email'>Votre email:</label>
                     <input required className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
                     overflow-auto basis-4/5'
                     type="email" name='email' id='email'
                     onChange={handleInputChange} 
                     value={formData.email}
                     />
-
                 </div>
-
-                <div className='flex gap-2'>
-
+                <div className='flex flex-col md:flex-row gap-2'>
                     <label className='mt-auto mb-auto basis-1/5'
-                    htmlFor='phonenumber'>Tél : </label>
-
+                    htmlFor='phonenumber'>Téléphone:</label>
                     <input required className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
                         overflow-auto basis-4/5'
                     type='tel' id='phonenumber'
+                    name='phonenumber'
                     onChange={handleInputChange}
                     value={formData.phonenumber}
                     />
-
                 </div>
-
-                <div className='flex gap-2'>
-
+                <div className='flex flex-col md:flex-row gap-2'>
                     <label className='mt-auto mb-auto basis-1/5'
-                     htmlFor='description'>Message au recruteur : </label>
-
-                    <textarea className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
+                     htmlFor='messsage'>Message au recruteur : </label>
+                    <textarea className='resize-none shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
                         overflow-auto basis-4/5'
-                    id='description'></textarea>
-
+                    id='message' value={formData.message} onChange={handleInputChange} name={'message'}></textarea>
                 </div>
-
                 <div className='flex justify-center gap-3'>
-
                     <button type='submit'
-                    className='bg-black rounded text-white p-2'>Envoyer votre candidature</button>
-                
+                    className='bg-primary hover:bg-primary-darker rounded text-white px-4 py-2 transition-all'>Envoyer votre candidature</button>
+            
                 </div>
             </form>
         </div>
     );
-
-
 };
 
 ApplyingForm.propTypes = {

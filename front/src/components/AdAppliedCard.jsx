@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Api from '../api/Api';
 import PropTypes from 'prop-types';
+import ButtonLink from './ButtonLink';
 
 const AdAppliedCard = ({data}) => {
   const [dt, setDt] = useState(data);
@@ -13,7 +14,7 @@ const AdAppliedCard = ({data}) => {
   }, [data]);
   
   return (
-    <div className='flex justify-between bg-slate-100 p-4'>
+    <div className='flex justify-between bg-slate-100 p-4 items-center'>
       <div className='flex flex-col'>
         <div className='flex gap-2'>
           <span>Nom:</span>
@@ -37,7 +38,7 @@ const AdAppliedCard = ({data}) => {
         </div>
       </div>
       <div>
-        <Link to={`/ad_details/${data?.adId}`} className='px-4 py-2 border-2 rounded'>Voir</Link>
+        <ButtonLink to={`/ad_details/${data?.adId}`} className='border-2 rounded border-primary text-primary hover:bg-primary hover:text-white'>Voir</ButtonLink>
       </div>
     </div>
   );

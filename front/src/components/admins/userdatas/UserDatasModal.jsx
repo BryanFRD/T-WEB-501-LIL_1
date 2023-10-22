@@ -96,7 +96,7 @@ const UserDatasModal = ({modalData, show, setShow, setDataList}) => {
   }, [modalData]);
   
   return (
-    <Modal show={show} title={'Utilisateur'} setShow={setShow}>
+    <Modal show={show} title={'utilisateur'} setShow={setShow}>
       <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-2'>
           <label>Email:</label>
