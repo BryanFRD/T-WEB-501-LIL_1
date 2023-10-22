@@ -9,8 +9,8 @@ class ApplierValidator extends BaseValidator {
   }).required();
   
   #create = Joi.object({
-    firstname: Joi.string().required(),
-    lastname: Joi.string().required(),
+    firstname: Joi.string().min(3).required(),
+    lastname: Joi.string().min(3).required(),
     email: Joi.string().email().required(),
     phonenumber: Joi.string().regex(/^(?:0|\+33?|0?0?33?|)([1-9]?(?:[0-9]?){8})$/).required(),
     adId: Joi.string().uuid().required(),
@@ -23,8 +23,8 @@ class ApplierValidator extends BaseValidator {
   
   #update = Joi.object({
     id: Joi.string().uuid().required(),
-    firstname: Joi.string(),
-    lastname: Joi.string(),
+    firstname: Joi.string().min(3),
+    lastname: Joi.string().min(3),
     email: Joi.string().email(),
     phonenumber: Joi.string().regex(/^(?:0|\+33 ?|0?0?33 ?|)([1-9] ?(?:[0-9] ?){8})$/i),
     deleted: Joi.boolean().default(false),

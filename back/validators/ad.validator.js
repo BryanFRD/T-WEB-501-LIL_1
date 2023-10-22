@@ -19,25 +19,25 @@ class AdValidator extends BaseValidator {
   }).required();
   
   #create = Joi.object({
-    title: Joi.string().required(),
-    description: Joi.string().required(),
-    status: Joi.string().default('OPEN'),
+    title: Joi.string().min(3).required(),
+    description: Joi.string().min(3).required(),
+    status: Joi.string().min(1).default('Ouvert'),
     contractTypes: Joi.array().items(Joi.string().uuid()).required(),
     companyId: Joi.string().uuid().required(),
-    wages: Joi.string().required(),
-    place: Joi.string().required(),
-    workingTime: Joi.string().required()
+    wages: Joi.string().min(1).required(),
+    place: Joi.string().min(1).required(),
+    workingTime: Joi.string().min(1).required()
   }).required();
   
   #update = Joi.object({
-    title: Joi.string(),
-    description: Joi.string(),
-    status: Joi.string(),
-    contractTypes: Joi.array(),
+    title: Joi.string().min(3),
+    description: Joi.string().min(3),
+    status: Joi.string().min(1),
+    contractTypes: Joi.array().items(Joi.string().uuid()),
     companyId: Joi.string().uuid(),
-    wages: Joi.string(),
-    place: Joi.string(),
-    workingTime: Joi.string(),
+    wages: Joi.string().min(1),
+    place: Joi.string().min(1),
+    workingTime: Joi.string().min(1),
     deleted: Joi.boolean().default(false),
   }).required();
   

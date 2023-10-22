@@ -9,19 +9,19 @@ class ClientValidator extends BaseValidator {
   });
   
   #create = Joi.object({
-    firstname: Joi.string().required(),
-    lastname: Joi.string().required(),
+    firstname: Joi.string().min(3).required(),
+    lastname: Joi.string().min(3).required(),
     phonenumber: Joi.string().regex(/^(?:0|\+33 ?|0?0?33 ?|)([1-9] ?(?:[0-9] ?){8})$/i).required(),
-    description: Joi.string(),
+    description: Joi.string().min(3),
     associatedId: Joi.string().uuid(),
   }).required();
   
   #update = Joi.object({
     id: Joi.string().uuid().required(),
-    firstname: Joi.string(),
-    lastname: Joi.string(),
+    firstname: Joi.string().min(3),
+    lastname: Joi.string().min(3),
     phonenumber: Joi.string().regex(/^(?:0|\+33 ?|0?0?33 ?|)([1-9] ?(?:[0-9] ?){8})$/i),
-    description: Joi.string(),
+    description: Joi.string().min(3),
     associatedId: Joi.string().uuid(),
     deleted: Joi.boolean().default(false),
   }).required();
