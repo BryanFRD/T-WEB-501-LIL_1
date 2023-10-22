@@ -12,7 +12,10 @@ const DisplayCards = ({search}) => {
         .then((response) => { 
           setAdData(response.data.models); 
         })
-        .catch(() => setAdData([])); 
+        .catch((error) => {
+          console.log(error)
+          setAdData([])
+        }); 
     }
     loadDatas(); 
   }, [search]); 
