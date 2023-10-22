@@ -40,7 +40,7 @@ class CompanyController extends BaseController {
       paranoid: !data.deleted,
     })
       .then(async (model) => {
-        res.status(200).json({success: true, model: await model?.getUserData()})
+        res.status(200).json({success: true, model: await model?.getUserData({paranoid: !data.deleted})})
       })
       .catch((err) => res.status(400).json({success: false, message: err.message}))
   }
@@ -57,7 +57,7 @@ class CompanyController extends BaseController {
       paranoid: !data.deleted,
     })
       .then(async (model) => {
-        res.status(200).json({success: true, models: await model?.getAds()})
+        res.status(200).json({success: true, models: await model?.getAds({paranoid: !data.deleted})})
       })
       .catch((err) => res.status(400).json({success: false, message: err.message}))
   }
