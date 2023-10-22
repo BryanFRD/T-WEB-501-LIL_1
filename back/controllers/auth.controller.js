@@ -13,14 +13,14 @@ class AuthController {
   }
   
   validateAccount = (req, res) => {
-    
+    //TODO validate account with token using NodeMailer
   }
   
   register = async (req, res) => {
     const response = this.validator.validateRegister(req.body);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
@@ -49,7 +49,7 @@ class AuthController {
     const response = this.validator.validateLogin(req.body);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     

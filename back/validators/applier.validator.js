@@ -12,7 +12,7 @@ class ApplierValidator extends BaseValidator {
     firstname: Joi.string().required(),
     lastname: Joi.string().required(),
     email: Joi.string().email().required(),
-    phonenumber: Joi.string().required(),
+    phonenumber: Joi.string().regex(/^(?:0|\+33?|0?0?33?|)([1-9]?(?:[0-9]?){8})$/).required(),
     adId: Joi.string().uuid().required(),
   }).required();
   
@@ -26,7 +26,7 @@ class ApplierValidator extends BaseValidator {
     firstname: Joi.string(),
     lastname: Joi.string(),
     email: Joi.string().email(),
-    phonenumber: Joi.string(),
+    phonenumber: Joi.string().regex(/^(?:0|\+33 ?|0?0?33 ?|)([1-9] ?(?:[0-9] ?){8})$/i),
     deleted: Joi.boolean().default(false),
   }).required();
   

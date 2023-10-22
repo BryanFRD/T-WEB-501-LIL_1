@@ -21,7 +21,7 @@ class UserDataController extends BaseController {
     const response = this.validator.validateFindAll(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
@@ -41,7 +41,7 @@ class UserDataController extends BaseController {
     const response = this.validator.validateUpdate(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     

@@ -13,7 +13,7 @@ class AdController extends BaseController {
     const response = this.validator.validateFindAll(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
@@ -34,7 +34,7 @@ class AdController extends BaseController {
     const response = this.validator.validateFindCompany(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
@@ -51,7 +51,7 @@ class AdController extends BaseController {
     const response = this.validator.validateFindContractTypes(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
@@ -68,7 +68,7 @@ class AdController extends BaseController {
     const response = this.validator.validateFindAppliers(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
@@ -85,7 +85,7 @@ class AdController extends BaseController {
     const response = this.validator.validateCreate(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
@@ -124,7 +124,7 @@ class AdController extends BaseController {
     const response = this.validator.validateUpdate(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
