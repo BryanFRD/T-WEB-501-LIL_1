@@ -82,16 +82,16 @@ const PlaceAdForm = () => {
       <h1 className='text-xl'><strong>Déposer votre annonce</strong></h1>
       <div>
         <form onSubmit={handleSubmit} className='flex gap-6 flex-col'>
-          <div className='flex gap-2'>
+          <div className='flex flex-col md:flex-row gap-2'>
             <label className='mt-auto mb-auto basis-1/5' htmlFor='title'>Titre de votre annonce:</label>
             <input className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline overflow-auto basis-4/5' type='text' id='title' required name='title' onChange={handleInputChange} value={AdFormData.title} />
           </div>
-          <div className='flex gap-2'>
+          <div className='flex flex-col md:flex-row gap-2'>
             <label htmlFor='description' className='mt-auto mb-auto basis-1/5'>Description de votre annonce:</label>
             <textarea id='description' rows='5' cols='33' className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline overflow-auto basis-4/5' required name='description' onChange={handleInputChange} value={AdFormData.description}
             ></textarea>
-          </div> 
-          <div className='flex gap-2'>
+          </div>
+          <div className='flex flex-col md:flex-row gap-2'>
             <label
               htmlFor='contractTypes'
               className='mt-auto mb-auto basis-1/5'>
@@ -99,7 +99,7 @@ const PlaceAdForm = () => {
             </label>
             <AsyncSelect cacheOptions loadOptions={loadContractType} defaultOptions isMulti options={contractTypes} className='basis-4/5' required name='contractTypes' onChange={handleAsyncSelectChange} value={AdFormData.contractTypes}/>
           </div>
-          <div className='flex gap-2'>
+          <div className='flex flex-col md:flex-row gap-2'>
             <label
               htmlFor='wages'
               className='mt-auto mb-auto basis-1/5'>
@@ -108,20 +108,20 @@ const PlaceAdForm = () => {
             <input id='wages' type='text' className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
             overflow-auto basis-4/5' required name='wages' onChange={handleInputChange} value={AdFormData.wages}/>
           </div>    
-          <div className='flex gap-2'>
+          <div className='flex flex-col md:flex-row gap-2'>
             <label htmlFor='place'
             className='mt-auto mb-auto basis-1/5'>Lieu:</label>
             <input id='place' type='text'
             className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
             overflow-auto basis-4/5' required name='place' onChange={handleInputChange} value={AdFormData.place}/>
           </div>  
-          <div className='flex gap-2'>
+          <div className='flex flex-col md:flex-row gap-2'>
             <label htmlFor='workingTime' className='mt-auto mb-auto basis-1/5'>Horaires de travail:</label>
             <input id='workingTime' type='text' className='shadow appearance-none border rounded py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline
             overflow-auto basis-4/5' required name='workingTime' onChange={handleInputChange} value={AdFormData.workingTime}/>
           </div>
           <div>
-            <button type='submit' className='bg-black rounded text-white p-2'> Déposer une annonce</button>  
+            <button type='submit' className='px-4 py-2 transition-all bg-primary hover:bg-primary-darker rounded text-white font-semibold'>Déposer une annonce</button>  
           </div>          
         </form>
       </div>

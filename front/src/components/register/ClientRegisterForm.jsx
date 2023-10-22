@@ -39,7 +39,7 @@ const ClientRegisterForm = () => {
   }
   
   return (
-    <form onSubmit={handleSubmit} className="px-8 pt-6 pb-8 flex flex-col gap-6">
+    <form onSubmit={handleSubmit} className="px-4 pt-6 pb-8 flex flex-col gap-6">
       <Input errors={errors.firstname} title={'Prénom'} placeholder={'Prénom'} name={'firstname'}/>
       <Input errors={errors.lastname} title={'Nom'} placeholder={'Nom'} name={'lastname'}/>
       <Input errors={errors.email} title={`Email`} placeholder={'exemple@jobhub.fr'} name={'email'}/>

@@ -39,7 +39,7 @@ const CompanyRegisterForm = () => {
   }
   
   return (
-    <form onSubmit={handleSubmit} className="px-8 pt-6 pb-8 flex flex-col gap-6">
+    <form onSubmit={handleSubmit} className="px-4 pt-6 pb-8 flex flex-col gap-6">
       <Input errors={errors.name}  title={'Nom de l\'entreprise'} placeholder={'Nom de l\'entreprise'} name={'name'}/>
       <Input errors={errors.email} title={`Email`} placeholder={'exemple@jobhub.fr'} name={'email'}/>
       <Input errors={errors.phonenumber} title={'Numéro de téléphone'} placeholder={'0612345678'} name={'phonenumber'} />
