@@ -48,7 +48,7 @@ const SearchBar = ({setSearch}) => {
         </div>
         
         <button type='submit' className='flex items-center gap-1 shadow appearance-none border rounded py-2 px-3 bg-primary hover:bg-primary-darker transition-all'>
-            <div className='text-white pe-3'>
+            <div className='text-white pe-3 md:pe-0'>
                 <SearchIcon/>
             </div>
             <p className='md:hidden text-white font-semibold'>Rechercher</p>
