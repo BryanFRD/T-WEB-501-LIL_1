@@ -1,20 +1,9 @@
 # Project explaination : 
-- The goal is to create a website to manage job advertisment. 
+- The goal is to create a website to manage job advertisment.
 
 # Technologies used :
-- Front-end : ReactJS, Vite, TailWindCSS, Axios, I18next;
+- Front-end : ReactJS, Vite, TailWindCSS, Axios, React Router;
 - Back-end : NodeJS, Express, Sequalize, mySQL;
-
-# Git commands :
-- git add . 
-- git commit -m ""
-- git checkout dev
-- git pull : retrieve the version pushed on the dev branch
-- git merge my-branch : merging my branch with the dev branch
-- git push
-- git checkout my-branch : go back on the local user branch
-- git merge dev : retrieve the last version of everything
-
 
 # Functions : 
 - Open the ads; 
@@ -27,9 +16,9 @@
 - Allow account modification and deletion; 
 
 # Front-end commands :
-npm install : allows to install libraries; 
-npm run dev : allows to launch the website; 
+- `npm install` : allows to install libraries;
+- `npm run dev` : allows to launch the website;
 
 # Back-end commands :
-npm install : allows to install librairies; 
-npm start : allows to launch the website; 
+- `npm install` : allows to install libraries;
+- `npm run dev` : allows to launch the web server;
