@@ -58,7 +58,7 @@ const UserDatasModal = ({modalData, show, setShow, setDataList}) => {
       .then(() => modalData.updateData({...modalData.data, deletedAt: !modalData.data.deletedAt ? new Date() : null}))
       .catch(() => {});
     }
-    
+    console.log(modalData.data)
     Api.put(`/userdata/${modalData.data.id}`, dataEntries, {params: {deleted: true}})
       .then(({data}) => {
         if(data.success){
@@ -67,13 +67,13 @@ const UserDatasModal = ({modalData, show, setShow, setDataList}) => {
           }
           
           setShow(false)
-          toast.success('Admin mis à jour avec succès !');
+          toast.success('Utilisateur mis à jour avec succès !');
           return;
         }
-        toast.error('Erreur lors de la mise à jour de l\'admin !');
+        toast.error('Erreur lors de la mise à jour de l\'utilisateur !');
       })
       .catch(() => {
-        toast.error('Erreur lors de la mise à jour de l\'admin !');
+        toast.error('Erreur lors de la mise à jour de l\'utilisateur !');
       });
   }
   

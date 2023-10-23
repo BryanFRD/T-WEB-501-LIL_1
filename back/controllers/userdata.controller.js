@@ -63,12 +63,14 @@ class UserDataController extends BaseController {
             delete req.datas.password;
         }
         
-        data.password = data.newPassword;
+        if(data.newPassword)
+          data.password = data.newPassword;
+        
         return model.update(data)
           .then((updatedModel) => {
             const token = jwt.sign({id: updatedModel.id, updatedAt: updatedModel.updatedAt}, process.env.TOKEN, {expiresIn: 86400});
             
-            if(req.user.isAdmin)
+            if(req.user.id === updatedModel.id)
               setCookies(res, token);
             
             return res.status(200).json({success: true, model: updatedModel});

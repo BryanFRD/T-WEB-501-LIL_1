@@ -109,7 +109,7 @@ const DisplayDetailsScreen = () => {
             {(user?.isCompany || user?.isAdmin) &&
             <>
                 <h2 className='text-center text-xl font-semibold'>Candidatures:</h2>
-                <div className='flex justify-center items-center mb-8'>
+                <div className='flex flex-col justify-center items-center mb-8 px-8 gap-8'>
                     {appliers.map((applier) => <AdAppliersCard key={applier} applier={applier}/>)}
                 </div>
             </>
