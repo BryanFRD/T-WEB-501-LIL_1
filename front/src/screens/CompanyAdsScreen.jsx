@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {UserContext} from '../contexts/UserContext';
 import Api from '../api/Api';
 import AdsModal from '../components/admins/ads/AdsModal';
@@ -21,7 +21,7 @@ const CompanyAdsScreen = () => {
       return;
     }
     
-    Api.get(`/companies/${user.id}/ads`)
+    Api.get(`/companies/${user.id}/ads`, {params: {deleted: true}})
       .then(({data}) => setData(data.models))
       .catch(() => setData([]));
   }, [user]);

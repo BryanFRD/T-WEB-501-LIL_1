@@ -1,5 +1,3 @@
-import React from 'react';
-import { UserContext } from '../contexts/UserContext';
 import PlaceAdForm from '../components/placeAd/PlaceAdForm';
 
 const PlaceAdScreen = () => {

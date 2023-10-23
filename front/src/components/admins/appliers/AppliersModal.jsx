@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from '../../Modal';
 import AsyncSelect from 'react-select/async';
 import Api from '../../../api/Api';
 import toast from 'react-hot-toast';
+import PropTypes from 'prop-types';
 
 const AppliersModal = ({modalData, show, setShow, setDataList}) => {
   const [data, setData] = useState({
@@ -130,7 +131,7 @@ const AppliersModal = ({modalData, show, setShow, setDataList}) => {
   }, [modalData]);
   
   return (
-    <Modal show={show} title={'admin'} setShow={setShow}>
+    <Modal show={show} title={'candidature'} setShow={setShow}>
       <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-2'>
           <label>Nom:</label>
@@ -167,5 +168,12 @@ const AppliersModal = ({modalData, show, setShow, setDataList}) => {
     </Modal>
   );
 };
+
+AppliersModal.propTypes = {
+  modalData: PropTypes.object,
+  show: PropTypes.bool,
+  setShow: PropTypes.func,
+  setDataList: PropTypes.func
+}
 
 export default AppliersModal;

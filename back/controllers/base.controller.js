@@ -19,7 +19,7 @@ class BaseController {
     const response = this.validator.validateFindByPk(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
@@ -40,7 +40,7 @@ class BaseController {
     const response = this.validator.validateFindAll(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
@@ -57,7 +57,7 @@ class BaseController {
     const response = this.validator.validateCreate(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
@@ -70,7 +70,7 @@ class BaseController {
     const response = this.validator.validateUpdate(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
@@ -94,11 +94,11 @@ class BaseController {
     const response = this.validator.validateDelete(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
-    this.model.findByPk(req.params.id)
+    this.model.findByPk(data.id)
       .then((model) => {
         if (!model) {
           return res.status(404).json({
@@ -118,11 +118,11 @@ class BaseController {
     const response = this.validator.validateRestore(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
-    this.model.findByPk(req.params.id, {paranoid: false})
+    this.model.findByPk(data.id, {paranoid: false})
       .then((model) => {
         if (!model) {
           return res.status(404).json({

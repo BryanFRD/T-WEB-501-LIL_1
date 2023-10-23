@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import AsyncSelect from 'react-select/async';
 import Api from '../../../api/Api';
 import Modal from '../../Modal';
+import PropTypes from 'prop-types';
 
 const ContractTypesModal = ({modalData, show, setShow, setDataList}) => {
   const [data, setData] = useState({
@@ -87,7 +87,7 @@ const ContractTypesModal = ({modalData, show, setShow, setDataList}) => {
   }, [modalData]);
   
   return (
-    <Modal show={show} title={'Type de contrat'} setShow={setShow}>
+    <Modal show={show} title={'type de contrat'} setShow={setShow}>
       <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-2'>
           <label>Titre:</label>
@@ -104,5 +104,12 @@ const ContractTypesModal = ({modalData, show, setShow, setDataList}) => {
     </Modal>
   );
 };
+
+ContractTypesModal.propTypes = {
+  modalData: PropTypes.object,
+  show: PropTypes.bool.isRequired,
+  setShow: PropTypes.func.isRequired,
+  setDataList: PropTypes.func.isRequired
+}
 
 export default ContractTypesModal;

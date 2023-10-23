@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Login from './Login';
 import Subscribe from './Subscribe';
 import LaunchResearch from './LaunchResearch';
@@ -12,7 +12,7 @@ const Navbar = () => {
     
     return (
         <>
-        <nav className='grid grid-flow-rows auto-rows-max gap-3
+        <nav className='grid grid-flow-rows auto-rows-max gap-8 my-4 md:my-0
         md:grid md:grid-rows-1 md:grid-cols-6'>
                 <Logo/>
                 <LaunchResearch/>

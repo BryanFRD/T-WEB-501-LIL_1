@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Modal from '../../Modal';
 import AsyncSelect from 'react-select/async';
 import Api from '../../../api/Api';
 import toast from 'react-hot-toast';
 import { UserContext } from '../../../contexts/UserContext';
+import PropTypes from 'prop-types';
 
 const AdsModal = ({modalData, show, setShow, setDataList}) => {
   const {user} = useContext(UserContext);
@@ -214,5 +215,12 @@ const AdsModal = ({modalData, show, setShow, setDataList}) => {
     </Modal>
   );
 };
+
+AdsModal.propTypes = {
+  modalData: PropTypes.object,
+  show: PropTypes.bool,
+  setShow: PropTypes.func,
+  setDataList: PropTypes.func,
+}
 
 export default AdsModal;

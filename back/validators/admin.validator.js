@@ -9,17 +9,17 @@ class AdminValidator extends BaseValidator {
   });
   
   #create = Joi.object({
-    firstname: Joi.string().required(),
-    lastname: Joi.string().required(),
-    name: Joi.string().required(),
+    firstname: Joi.string().min(3).required(),
+    lastname: Joi.string().min(3).required(),
+    name: Joi.string().min(3).required(),
     associatedId: Joi.string().uuid(),
   }).required();
   
   #update = Joi.object({
     id: Joi.string().uuid().required(),
-    firstname: Joi.string(),
-    lastname: Joi.string(),
-    name: Joi.string(),
+    firstname: Joi.string().min(3),
+    lastname: Joi.string().min(3),
+    name: Joi.string().min(3),
     associatedId: Joi.string().uuid(),
     deleted: Joi.boolean().default(false),
   }).required();

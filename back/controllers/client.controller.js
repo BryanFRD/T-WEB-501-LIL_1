@@ -12,7 +12,7 @@ class ClientController extends BaseController {
     const response = this.validator.validateFindAll(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     
@@ -35,7 +35,7 @@ class ClientController extends BaseController {
     const response = this.validator.validateFindUserData(req.datas);
     const data = response?.value;
     
-    if(!data){
+    if(response.error){
       return res.status(400).json({success: false, message: response.error});
     }
     

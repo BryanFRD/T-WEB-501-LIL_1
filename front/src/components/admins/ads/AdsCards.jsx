@@ -1,8 +1,9 @@
 import moment from 'moment';
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Api from '../../../api/Api';
 import { UserContext } from '../../../contexts/UserContext';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const AdsCards = ({data, handleModalData}) => {
   const {user} = useContext(UserContext);
@@ -107,5 +108,10 @@ const AdsCards = ({data, handleModalData}) => {
     </div>
   );
 };
+
+AdsCards.propTypes = {
+  data: PropTypes.object,
+  handleModalData: PropTypes.func,
+}
 
 export default AdsCards;

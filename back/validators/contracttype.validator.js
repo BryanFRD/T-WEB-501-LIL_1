@@ -4,12 +4,12 @@ const BaseValidator = require('./base.validator');
 class ContractTypeValidator extends BaseValidator {
   
   #create = Joi.object({
-    name: Joi.string().required(),
+    name: Joi.string().min(3).required(),
   }).required();
   
   #update = Joi.object({
     id: Joi.string().uuid().required(),
-    name: Joi.string(),
+    name: Joi.string().min(3),
     deleted: Joi.boolean().default(false),
   }).required();
   

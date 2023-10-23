@@ -5,15 +5,15 @@ class UserDataValidator extends BaseValidator {
   
   #create = Joi.object({
     email: Joi.string().email().required(),
-    password: Joi.string().required(),
+    password: Joi.string().min(3).required(),
     validated: Joi.boolean().default(false),
   }).required();
   
   #update = Joi.object({
     id: Joi.string().uuid().required(),
     email: Joi.string().email(),
-    password: Joi.string(),
-    newPassword: Joi.string(),
+    password: Joi.string().min(3),
+    newPassword: Joi.string().min(3),
     validated: Joi.boolean(),
     deleted: Joi.boolean().default(false),
   }).required();
