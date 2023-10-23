@@ -30,8 +30,8 @@ const AdCards = ({ ad }) => {
   return (
     <div className='flex flex-col gap-3 shadow appearance-none border rounded w-full py-2 px-3 text-dark leading-tight focus:outline-none focus:shadow-outline'>
       <h1  className='font-semibold text-lg mx-auto'>{ad.title}</h1>
-      <div className='text-start mx-3'>
-        <span className='truncate'>{ad.description}</span>
+      <div className='text-start mx-3 truncate'>
+        <span>{ad.description}</span>
       </div>
       {ad?.place && 
         <div className='flex gap-1 items-center text-slate-500'>
